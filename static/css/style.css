@@ -176,19 +176,23 @@ footer { background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20p
     align-items: center;
     justify-content: center;
     margin-bottom: 18px;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .social-links a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 12px;
+    padding: 6px 10px;
     background: #fff;
     border: 1px solid #e0e0e0;
     color: #333;
     text-decoration: none;
     border-radius: 6px;
     font-size: 14px;
+    min-width: 44px;
+    box-sizing: border-box;
 }
 
 .social-links a:hover {
@@ -200,6 +204,11 @@ footer { background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20p
 .social-icon {
     font-size: 16px;
 }
+
+/* Ensure nav and header content don't overflow */
+.header-content { flex-wrap: wrap; }
+nav ul { flex-wrap: wrap; }
+.mobile-toggle { z-index: 50; }
 
 /* Partners grid */
 .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 18px; align-items: center; }

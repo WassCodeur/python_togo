@@ -20,7 +20,7 @@
                     
                 </div>
 
-                <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+                <button class="mobile-toggle" aria-controls="main-nav" aria-expanded="false">☰</button>
 
                 <nav id="main-nav">
                     <ul>
@@ -36,8 +36,8 @@
 
                         <li>
                             <div class="lang-switch">
-                                <button class="active" onclick="switchLanguage('fr')">FR</button>
-                                <button onclick="switchLanguage('en')">EN</button>
+                                <button class="active" onclick="switchLanguage(event,'fr')">FR</button>
+                                <button onclick="switchLanguage(event,'en')">EN</button>
                             </div>
                         </li>
                         <li>
@@ -173,15 +173,29 @@ title:'PayPal - The safer, easier way to pay online!',
     </footer>
 
     <script>
-        function toggleMobileMenu() {
-            document.getElementById('main-nav').classList.toggle('active');
-        }
+        // Central mobile toggle and language switch behavior for all pages
+        document.addEventListener('DOMContentLoaded', function () {
+            const nav = document.getElementById('main-nav');
+            const btn = document.querySelector('.mobile-toggle');
+            if (btn && nav) {
+                btn.addEventListener('click', function (e) {
+                    nav.classList.toggle('active');
+                    const expanded = nav.classList.contains('active');
+                    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                });
+            }
 
-        // Basic language switcher hook (kept simple)
-        function switchLanguage(lang) {
-            localStorage.setItem('lang', lang);
+            // Ensure nav items wrap and don't overflow on small screens
+            const social = document.querySelector('.social-links');
+            if (social) {
+                social.style.flexWrap = 'wrap';
+            }
+        });
+
+        function switchLanguage(ev, lang) {
+            try { localStorage.setItem('lang', lang); } catch (e) {}
             document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (ev && ev.target) ev.target.classList.add('active');
         }
     </script>
 

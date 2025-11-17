@@ -58,12 +58,4 @@
 
 {% endblock %}
 
-{% block scripts %}
-<script>
-    // Keep header mobile toggle available
-    document.addEventListener('DOMContentLoaded', function(){
-        const btn = document.querySelector('.mobile-toggle');
-        if (btn) btn.addEventListener('click', function(){ document.getElementById('main-nav').classList.toggle('active'); });
-    });
-</script>
-{% endblock %}
+{% block scripts %}{% endblock %}
