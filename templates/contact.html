@@ -24,8 +24,29 @@
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" required></textarea>
                 </div>
+                <div class="form-group">
+                    <label class="checkbox-label"><input type="checkbox" id="agree_privacy" name="agree_privacy" required> J'ai lu et j'accepte la <a href="/privacy" target="_blank">politique de confidentialité</a>.</label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label"><input type="checkbox" id="agree_coc" name="agree_coc" required> J'ai lu et j'accepte le <a href="/code-of-conduct" target="_blank">Code de conduite</a>.</label>
+                </div>
                 <button type="submit" class="btn">Envoyer</button>
             </form>
         </div>
     </section>
 {% endblock %}
+
+    {% block scripts %}
+    <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e){
+        const p = document.getElementById('agree_privacy');
+        const c = document.getElementById('agree_coc');
+        if (!p || !c) return;
+        if (!p.checked || !c.checked) {
+            e.preventDefault();
+            alert('Veuillez accepter la politique de confidentialité et le Code de conduite avant d\'envoyer votre message.');
+            return false;
+        }
+    });
+    </script>
+    {% endblock %}

@@ -46,6 +46,13 @@
             <label for="message">Message (optionnel)</label>
             <textarea id="message" name="message" rows="4"></textarea>
 
+            <div style="margin-top:12px">
+                <label class="checkbox-label"><input type="checkbox" id="agree_privacy" name="agree_privacy" required> J'ai lu et j'accepte la <a href="/privacy" target="_blank">politique de confidentialité</a>.</label>
+            </div>
+            <div>
+                <label class="checkbox-label"><input type="checkbox" id="agree_coc" name="agree_coc" required> J'ai lu et j'accepte le <a href="/code-of-conduct" target="_blank">Code de conduite</a>.</label>
+            </div>
+
             <button type="submit">Envoyer la demande</button>
         </form>
 
@@ -60,6 +67,12 @@
 document.getElementById('partnership-form').addEventListener('submit', async function(e){
     e.preventDefault();
     const form = e.target;
+    const pchk = document.getElementById('agree_privacy');
+    const cchk = document.getElementById('agree_coc');
+    if (!pchk.checked || !cchk.checked) {
+        document.getElementById('partnership-result').textContent = "Veuillez accepter la politique de confidentialité et le Code de conduite avant d'envoyer.";
+        return;
+    }
     const data = {
         organization: form.organization.value,
         contact_name: form.contact_name.value,

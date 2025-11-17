@@ -66,6 +66,24 @@ class PartnershipRequest(BaseModel):
     message: Optional[str] = None
 
 
+class JoinSubmit(BaseModel):
+    name: str
+    email: str
+    city: Optional[str] = None
+    level: Optional[str] = None
+    agree_privacy: bool
+    agree_coc: bool
+
+
+class ContactSubmit(BaseModel):
+    name: str
+    email: str
+    subject: str
+    message: str
+    agree_privacy: bool
+    agree_coc: bool
+
+
 # In-memory holders for partnership requests and partners
 PARTNERS = [
     {"name": "Python Software Foundation", "website": "https://www.python.org/", "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/b_rgb:457FAB/c_crop,w_1000,h_563,ar_16:9,g_auto/v1750463364/psf-logo_gqppfi.png"},
@@ -85,6 +103,8 @@ GALLERIES = [
     {"date": "2024-11-30", "title": "PyDay Togo 2024", "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763346354/WUL_0330_rnemnd.jpg", "link": "https://drive.google.com/drive/folders/1UCZgBjcAaztwCi5R74WRqI8oxbCe1DNC?usp=sharing"},
 ]
 PARTNERSHIP_REQUESTS: List[dict] = []
+JOIN_REQUESTS: List[dict] = []
+CONTACT_MESSAGES: List[dict] = []
 
 
 # Template routes
@@ -134,10 +154,56 @@ async def partnership_submit(request: PartnershipRequest):
     return JSONResponse(content={"status": "received"})
 
 
+@app.post('/api/v1/join')
+async def join_submit(request: Request):
+    # Accept form-encoded or JSON
+    data = {}
+    ct = request.headers.get('content-type', '')
+    if 'application/json' in ct:
+        data = await request.json()
+    else:
+        form = await request.form()
+        data = dict(form)
+
+    # Normalize boolean fields
+    agree_privacy = data.get('agree_privacy') in (True, 'true', 'True', 'on', '1', 1)
+    agree_coc = data.get('agree_coc') in (True, 'true', 'True', 'on', '1', 1)
+    if not agree_privacy or not agree_coc:
+        return JSONResponse(status_code=400, content={"error": "consent_required"})
+
+    # store
+    JOIN_REQUESTS.append(data)
+    return JSONResponse(content={"status": "received"})
+
+
+@app.post('/api/v1/contact')
+async def contact_submit(request: Request):
+    data = {}
+    ct = request.headers.get('content-type', '')
+    if 'application/json' in ct:
+        data = await request.json()
+    else:
+        form = await request.form()
+        data = dict(form)
+
+    agree_privacy = data.get('agree_privacy') in (True, 'true', 'True', 'on', '1', 1)
+    agree_coc = data.get('agree_coc') in (True, 'true', 'True', 'on', '1', 1)
+    if not agree_privacy or not agree_coc:
+        return JSONResponse(status_code=400, content={"error": "consent_required"})
+
+    CONTACT_MESSAGES.append(data)
+    return JSONResponse(content={"status": "received"})
+
+
 @app.get('/gallery')
 async def gallery(request: Request):
     # Placeholder gallery page — user can set external link via localStorage or update template
     return templates.TemplateResponse(request=request, name='gallery.html', context={"current_year": current_year, "galleries": GALLERIES})
+
+
+@app.get('/privacy')
+async def privacy(request: Request):
+    return templates.TemplateResponse(request=request, name='privacy.html', context={"current_year": current_year})
 
 
 
