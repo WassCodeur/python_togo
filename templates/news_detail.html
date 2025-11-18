@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.title }} - {{ t.get('site-title','Python Togo') }}{% endblock %}
+
+{% block content %}
+<section class="container">
+  <p><a href="/actualities" class="btn btn-secondary">← {{ t.get('news-back','Retour aux actualités') }}</a></p>
+  <article>
+    <div class="card-meta">{{ item.date }}</div>
+    <h1>{{ item.title }}</h1>
+    {% if item.image %}
+    <p>
+      <a href="{{ item.image }}" target="_blank" rel="noopener">
+        <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" width="100%" height="">
+      </a>
+    </p>
+    {% endif %}
+    <p>{{ item.body }}</p>
+  </article>
+</section>
+{% endblock %}

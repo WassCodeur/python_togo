@@ -1,57 +1,55 @@
 {% extends 'base.html' %}
 
-{% block title %}Accueil - Python Togo{% endblock %}
+{% block title %}{{ t.get('home-title','Accueil') }} - {{ t.get('site-title','Python Togo') }}{% endblock %}
 
 {% block content %}
     <section class="container">
         <div class="intro">
-            <h1>Bienvenue sur Python Togo</h1>
-            <p>Python Togo est une communauté de développeurs et passionnés Python au Togo. Nous organisons des événements, des formations et promouvons l'usage de Python dans notre pays.</p>
+            <h1>{{ t.get('home-welcome','Bienvenue sur Python Togo') }}</h1>
+            <p>{{ t.get('home-intro','Python Togo est une communauté de développeurs et passionnés Python au Togo. Nous organisons des événements, des formations et promouvons l\'usage de Python dans notre pays.') }}</p>
             <p>
-                <a href="/join" class="btn">Rejoindre la communauté</a>
-                <a href="/events" class="btn btn-secondary">Voir les événements</a>
+                <a href="/join" class="btn">{{ t.get('home-join','Rejoindre la communauté') }}</a>
+                <a href="/events" class="btn btn-secondary">{{ t.get('home-view-events','Voir les événements') }}</a>
             </p>
         </div>
     </section>
 
    
     <section class="container">
-        <h2>Actualités récentes</h2>
+        <h2>{{ t.get('home-news-recent','Actualités récentes') }}</h2>
         <div class="card-grid">
-            <div class="card">
-                <div class="card-meta">2025-11-01</div>
-                <h3>Lancement d'un nouvel atelier Python</h3>
-                <p>Nous organisons un atelier sur les bases de Python et l'automatisation.</p>
+            {% for n in news_home %}
+            <article class="card">
+                <img src="{{ n.image }}" alt="{{ n.title }}" loading="lazy" width="600" height="340">
+                <div class="card-meta">{{ n.date }}</div>
+                <h3>{{ n.title }}</h3>
+                <p>{{ n.excerpt }}</p>
                 <div class="card-actions">
-                    <a href="/actualites" class="btn btn-secondary">Voir toutes les actualités</a>
+                    <a class="btn btn-secondary" href="/actualities/{{ n.id }}">{{ t.get('news-read-more','Voir plus') }}</a>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-meta">2025-09-15</div>
-                <h3>Rencontre communautaire à Lomé</h3>
-                <p>Retour sur la rencontre mensuelle et les projets présentés par les membres.</p>
-                <div class="card-actions">
-                    <a href="/actualites" class="btn btn-secondary">Voir toutes les actualités</a>
-                </div>
-            </div>
+            </article>
+            {% endfor %}
         </div>
+        <p style="margin-top:16px">
+            <a href="/actualities" class="btn btn-secondary">{{ t.get('home-news-all','Voir toutes les actualités') }}</a>
+        </p>
     </section>
 
      <section class="container">
-        <h2>Nos partenaires</h2>
+        <h2>{{ t.get('partners-our','Nos partenaires') }}</h2>
         <div class="partners-grid">
             {% if partners %}
                 {% for p in partners %}
                     <div class="partner-card">
                         {% if p.logo_url %}
-                            <a href="{{ p.website_url }}"><img src="{{ p.logo_url }}" alt="{{ p.name }}" class="partner-logo"></a>
+                            <a href="{{ p.website }}" target="_blank" rel="noopener"><img src="{{ p.logo_url }}" alt="{{ p.name }}" class="partner-logo"></a>
                         {% else %}
                             <div class="partner-placeholder">{{ p.name }}</div>
                         {% endif %}
                     </div>
                 {% endfor %}
             {% else %}
-                <p>Aucun partenaire pour le moment.</p>
+                <p>{{ t.get('partners-none','Aucun partenaire pour le moment.') }}</p>
             {% endif %}
         </div>
     </section>

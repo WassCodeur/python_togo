@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
-{% block title %}Contact - Python Togo{% endblock %}
+{% block title %}{{ t.get('contact-title','Contact') }} - {{ t.get('site-title','Python Togo') }}{% endblock %}
 
 {% block content %}
     <section class="container">
-        <h2>Contact</h2>
-        <p>Pour toute question, envoyez-nous un message via le formulaire.</p>
+        <h2>{{ t.get('contact-title','Contact') }}</h2>
+        <p>{{ t.get('contact-intro','Pour toute question, envoyez-nous un message via le formulaire.') }}</p>
         <div class="form-container">
-            <form id="contact-form" method="post" action="/api/v1/contact">
+            <form id="contact-form" method="post" action="/api/v1/contact" data-consent="{{ t.get('consent-alert','Veuillez accepter la politique de confidentialité et le Code de conduite avant de continuer.') }}">
                 <div class="form-group">
-                    <label for="name">Nom *</label>
+                    <label for="name">{{ t.get('label-name','Nom') }} *</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email *</label>
+                    <label for="email">{{ t.get('label-email','Email') }} *</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="subject">Sujet *</label>
+                    <label for="subject">{{ t.get('label-subject','Sujet') }} *</label>
                     <input type="text" id="subject" name="subject" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message *</label>
+                    <label for="message">{{ t.get('label-message','Message') }} *</label>
                     <textarea id="message" name="message" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="checkbox-label"><input type="checkbox" id="agree_privacy" name="agree_privacy" required> J'ai lu et j'accepte la <a href="/privacy" target="_blank">politique de confidentialité</a>.</label>
+                    <label class="checkbox-label"><input type="checkbox" id="agree_privacy" name="agree_privacy" required> {{ t.get('agree-privacy','J\'ai lu et j\'accepte la politique de confidentialité') }} (<a href="/privacy" target="_blank">{{ t.get('privacy-link-text','Politique de confidentialité') }}</a>).</label>
                 </div>
                 <div class="form-group">
-                    <label class="checkbox-label"><input type="checkbox" id="agree_coc" name="agree_coc" required> J'ai lu et j'accepte le <a href="/code-of-conduct" target="_blank">Code de conduite</a>.</label>
+                    <label class="checkbox-label"><input type="checkbox" id="agree_coc" name="agree_coc" required> {{ t.get('agree-coc','J\'ai lu et j\'accepte le Code de conduite') }} (<a href="/code-of-conduct" target="_blank">{{ 'Code of Conduct' if lang == 'en' else 'Code de conduite' }}</a>).</label>
                 </div>
-                <button type="submit" class="btn">Envoyer</button>
+                <button type="submit" class="btn">{{ t.get('btn-send','Envoyer') }}</button>
             </form>
         </div>
     </section>
@@ -44,7 +44,8 @@
         if (!p || !c) return;
         if (!p.checked || !c.checked) {
             e.preventDefault();
-            alert('Veuillez accepter la politique de confidentialité et le Code de conduite avant d\'envoyer votre message.');
+            const msg = document.getElementById('contact-form').dataset.consent || 'Veuillez accepter la politique de confidentialité et le Code de conduite avant de continuer.';
+            alert(msg);
             return false;
         }
     });

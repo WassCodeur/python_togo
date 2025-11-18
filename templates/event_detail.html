@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.title }} - {{ t.get('site-title','Python Togo') }}{% endblock %}
+
+{% block content %}
+<section class="container">
+  <p><a href="/events" class="btn btn-secondary">← {{ t.get('events-back','Retour aux événements') }}</a></p>
+  <article>
+    <div class="card-meta">{{ item.date }} • {{ item.location }}</div>
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.description }}</p>
+  </article>
+</section>
+{% endblock %}

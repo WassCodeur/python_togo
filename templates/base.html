@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Python Togo{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="preload" href="/static/images/Py.png" as="image" />
 
     {% block head %}{% endblock %}
 </head>
@@ -13,51 +14,36 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo-area">
-                    <a href="/" aria-label="Accueil">
-                        <img src="static/images/Py.png" alt="" width="120px">
-                    </a>
-                    
-                </div>
-
-                <button class="mobile-toggle" aria-controls="main-nav" aria-expanded="false">☰</button>
+                <a href="/" class="site-logo" aria-label="Accueil">
+                    <img src="/static/images/Py.png" alt="Python Togo" width="120" loading="eager" decoding="async" fetchpriority="high">
+                </a>
 
                 <nav id="main-nav">
                     <ul>
-                        <li><a href="/">Accueil</a></li>
-                        <li><a href="/about">À propos</a></li>
-                        <li><a href="/partners">Partenaires</a></li>
-                        <li><a href="/code-of-conduct">Code de conduite</a></li>
-                        <li><a href="/events">Événements</a></li>
-                        <li><a href="/actualities">Actualités</a></li>
-                        <li><a href="/gallery">Galerie</a></li>
-                        <li><a href="/join">Adhérer</a></li>
-                        <li><a href="/contact">Contact</a></li>
-
-                        <li>
-                            <div class="lang-switch">
-                                <button class="active" onclick="switchLanguage(event,'fr')">FR</button>
-                                <button onclick="switchLanguage(event,'en')">EN</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div id="donate-button"></div>
-                                <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-<script>
-PayPal.Donation.Button({
-env:'production',
-hosted_button_id:'PYDWFGRBP25TL',
-image: {
-src:'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
-alt:'Donate with PayPal button',
-title:'PayPal - The safer, easier way to pay online!',
-}
-}).render('#donate-button');
-</script>
-
-                        </li>
+                        <li><a href="/">{{ t.get('nav-home','Accueil') }}</a></li>
+                        <li><a href="/about">{{ t.get('nav-about','À propos') }}</a></li>
+                        <li><a href="/partners">{{ t.get('nav-partners','Partenaires') }}</a></li>
+                        <li><a href="/code-of-conduct">{{ t.get('nav-code','Code de conduite') }}</a></li>
+                        <li><a href="/events">{{ t.get('nav-events','Événements') }}</a></li>
+                        <li><a href="/actualities">{{ t.get('nav-news','Actualités') }}</a></li>
+                        <li><a href="/gallery">{{ t.get('nav-gallery','Galerie') }}</a></li>
+                        <li><a href="/join">{{ t.get('nav-join','Adhérer') }}</a></li>
+                        <li><a href="/contact">{{ t.get('nav-contact','Contact') }}</a></li>
                     </ul>
                 </nav>
+
+                <div class="header-actions">
+                    <button class="mobile-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Menu">☰</button>
+                </div>
+            </div>
+            <div class="header-sub">
+                <div class="lang-switch" role="group" aria-label="Language switch">
+                    <button type="button" class="lang-toggle" data-lang="fr" aria-pressed="{% if lang == 'fr' %}true{% else %}false{% endif %}">{{ t.get('lang-fr','FR') }}</button>
+                    <button type="button" class="lang-toggle" data-lang="en" aria-pressed="{% if lang == 'en' %}true{% else %}false{% endif %}">{{ t.get('lang-en','EN') }}</button>
+                </div>
+                <div class="donate-top">
+                    <a class="donate-button" href="{{ donate_url }}" target="_blank" rel="noopener">{{ t.get('donate','Donate') }}</a>
+                </div>
             </div>
         </div>
     </header>
@@ -70,30 +56,29 @@ title:'PayPal - The safer, easier way to pay online!',
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>À propos</h4>
-                    <p>Python Togo promeut le langage de programmation Python au Togo.</p>
-                        <div style="margin-top: 15px;"><a href="https://www.paypal.com/donate/?hosted_button_id=A6547S7YGMZ4A" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt=""></a></div>
-
+                    <h4><span>{{ t.get('footer-about-title','À propos') }}</span></h4>
+                    <p><span>{{ t.get('footer-about-desc','Python Togo promeut le langage de programmation Python au Togo.') }}</span></p>
+                    <div style="margin-top: 15px;"><a href="https://www.paypal.com/donate/?hosted_button_id=A6547S7YGMZ4A" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt=""></a></div>
                 </div>
                 <div class="footer-section">
-                    <h4>Liens</h4>
+                    <h4><span>{{ t.get('footer-links-title','Liens') }}</span></h4>
                     <ul>
-                        <li><a href="/">Accueil</a></li>
-                        <li><a href="/partners">Partenaires</a></li>
-                        <li><a href="/code-of-conduct">Code de conduite</a></li>
-                        <li><a href="/privacy">Politique de confidentialité</a></li>
-                        <li><a href="/events">Événements</a></li>
-                        <li><a href="/actualities">Actualités</a></li>
-                        <li><a href="/gallery">Galerie</a></li>
-                        <li><a href="/communities">Communautés</a></li>
-                        <li><a href="/join">Adhérer</a></li>
-                        <li><a href="https://drive.google.com/drive/folders/1Y20FxmO0GLsKgRjozf_WmLbPuFAuGV_P?usp=sharing">Logos</a></li>
+                        <li><a href="/">{{ t.get('nav-home','Accueil') }}</a></li>
+                        <li><a href="/partners">{{ t.get('nav-partners','Partenaires') }}</a></li>
+                        <li><a href="/code-of-conduct">{{ t.get('nav-code','Code de conduite') }}</a></li>
+                        <li><a href="/privacy">{{ t.get('privacy-link-text','Politique de confidentialité') }}</a></li>
+                        <li><a href="/events">{{ t.get('nav-events','Événements') }}</a></li>
+                        <li><a href="/actualities">{{ t.get('nav-news','Actualités') }}</a></li>
+                        <li><a href="/gallery">{{ t.get('nav-gallery','Galerie') }}</a></li>
+                        <li><a href="/communities">{{ t.get('nav-communities','Communautés') }}</a></li>
+                        <li><a href="/join">{{ t.get('nav-join','Adhérer') }}</a></li>
+                        <li><a href="https://drive.google.com/drive/folders/1Y20FxmO0GLsKgRjozf_WmLbPuFAuGV_P?usp=sharing" target="_blank">{{ t.get('footer-logos','Logos') }}</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
+                    <h4><span>{{ t.get('footer-contact-title','Contact') }}</span></h4>
                     <ul>
-                        <li>Email: contact@pytogo.org</li>
+                        <li><span>{{ t.get('label-email','Email') }}</span>: contact@pytogo.org</li>
                         <li>Lomé, Togo</li>
                     </ul>
                 </div>
@@ -161,14 +146,13 @@ title:'PayPal - The safer, easier way to pay online!',
             </div>
 
             <div class="footer-bottom">
-               
                 <div>
-                    Logo conçu avec ❤️ par <a href="https://www.linkedin.com/in/mawy7/" target="_blank">Mannie Young</a>
+                    <span>{{ t.get('footer-logo-by','Logo conçu avec ❤️ par') }}</span> <a href="https://www.linkedin.com/in/mawy7/" target="_blank">Mannie Young</a>
                 </div>
                 <div>
-                    Ce site a été conçu et développé avec ❤️ par <a href="https://www.linkedin.com/in/wasscodeur/?locale=en" target="_blank">Wachiou Bouraima </a> and <a href="https://www.linkedin.com/in/geoffreylgv/" target="_blank">Geoffrey Logovi</a> à l'aide de <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a> et déployé sur <a href="https://vercel.com/" target="_blank">Vercel</a>
+                    <span>{{ t.get('footer-site-by','Ce site a été conçu et développé avec ❤️ par') }}</span> <a href="https://www.linkedin.com/in/wasscodeur/?locale=en" target="_blank">Wachiou Bouraima</a> and <a href="https://www.linkedin.com/in/geoffreylgv/" target="_blank">Geoffrey Logovi</a> <span>{{ t.get('footer-using','à l\'aide de') }}</span> <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a> <span>{{ t.get('footer-and-deployed','et déployé sur') }}</span> <a href="https://vercel.com/" target="_blank">Vercel</a>
                 </div>
-                <p class="copy">&copy; {{ current_year }} Python Software Community Togo. Tous droits réservés.</p>
+                <p class="copy">&copy; {{ current_year }} Python Software Community Togo. <span>{{ t.get('footer-rights','Tous droits réservés.') }}</span></p>
             </div>
         </div>
     </footer>
@@ -179,10 +163,19 @@ title:'PayPal - The safer, easier way to pay online!',
             const nav = document.getElementById('main-nav');
             const btn = document.querySelector('.mobile-toggle');
             if (btn && nav) {
-                btn.addEventListener('click', function (e) {
+                btn.addEventListener('click', function () {
                     nav.classList.toggle('active');
                     const expanded = nav.classList.contains('active');
                     btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                    btn.classList.toggle('open', expanded);
+                    // Toggle icon and accessible label
+                    if (expanded) {
+                        btn.textContent = '✕';
+                        btn.setAttribute('aria-label', 'Close menu');
+                    } else {
+                        btn.textContent = '☰';
+                        btn.setAttribute('aria-label', 'Open menu');
+                    }
                 });
             }
 
@@ -191,6 +184,31 @@ title:'PayPal - The safer, easier way to pay online!',
             if (social) {
                 social.style.flexWrap = 'wrap';
             }
+
+            // Language toggle buttons (server cookie + page reload)
+            const langButtons = document.querySelectorAll('.lang-toggle');
+            if (langButtons && langButtons.length) {
+                langButtons.forEach(b => {
+                    b.addEventListener('click', function () {
+                        try { sessionStorage.setItem('scrollY', String(window.scrollY)); } catch (e) {}
+                        const code = b.getAttribute('data-lang');
+                        if (!code) return;
+                        if (b.getAttribute('aria-pressed') === 'true') return;
+                        langButtons.forEach(x => x.disabled = true);
+                        fetch('/lang/' + code, { method: 'GET', credentials: 'same-origin' })
+                            .then(() => location.reload())
+                            .catch(() => location.reload());
+                    });
+                });
+            }
+            // Restore scroll after language reload
+            try {
+                const y = sessionStorage.getItem('scrollY');
+                if (y) {
+                    window.scrollTo(0, parseInt(y, 10) || 0);
+                    sessionStorage.removeItem('scrollY');
+                }
+            } catch (e) {}
         });
 
         function switchLanguage(ev, lang) {

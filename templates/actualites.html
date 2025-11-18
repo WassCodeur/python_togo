@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Actualités - Python Togo{% endblock %}
+{% block title %}{{ t.get('news-title','Actualités') }} - {{ t.get('site-title','Python Togo') }}{% endblock %}
 
 {% block content %}
     <section class="container">
-        <h2>Actualités</h2>
+        <h2>{{ t.get('news-title','Actualités') }}</h2>
         <div class="card-grid">
-            <div class="card">
-                <div class="card-meta">2025-11-01</div>
-                <h3>Lancement d'un nouvel atelier Python</h3>
-                <p>Détails et inscription pour l'atelier à venir.</p>
-            </div>
-            <div class="card">
-                <div class="card-meta">2025-09-15</div>
-                <h3>Rencontre communautaire à Lomé</h3>
-                <p>Compte-rendu et ressources partagées lors de l'événement.</p>
-            </div>
+            {% for n in news %}
+            <article class="card">
+                <img src="{{ n.image }}" alt="{{ n.title }}" loading="lazy" width="600" height="340">
+                <div class="card-meta">{{ n.date }}</div>
+                <h3>{{ n.title }}</h3>
+                <p>{{ n.excerpt }}</p>
+                <div class="card-actions">
+                    <a class="btn btn-secondary" href="/actualities/{{ n.id }}">{{ t.get('news-read-more','Voir plus') }}</a>
+                </div>
+            </article>
+            {% endfor %}
         </div>
     </section>
 {% endblock %}
