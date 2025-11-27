@@ -18,6 +18,20 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000
 
 3. Open http://127.0.0.1:8000 in your browser.
 
+4. Development
+
+```bash
+# Install pre-commit hooks
+pre-commit install
+
+# Run linting and formatting
+ruff check --fix .
+ruff format .
+
+# Run all pre-commit checks
+pre-commit run --all-files
+```
+
 What is implemented
 
 - Template routes: `/`, `/about`, `/events`, `/actualites`, `/communities`, `/join`, `/contact`
