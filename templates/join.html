@@ -1,40 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}Adhérer - Python Togo{% endblock %}
+{% block title %}{{ t["join-title"] }} - {{ t["site-title"] }}{% endblock %}
 
 {% block content %}
     <section class="container">
-        <h2>Adhérer</h2>
-        <p>Rejoignez la communauté Python Togo en remplissant le formulaire ci-dessous.</p>
+        <h2>{{ t["join-title"] }}</h2>
+        <p>{{ t["join-intro"] }}</p>
         <div class="form-container">
             <form id="join-form" method="post" action="/api/v1/join">
                 <div class="form-group">
-                    <label for="name">Nom complet *</label>
+                    <label for="name">{{ t["label-fullname"] }} *</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email *</label>
+                    <label for="email">{{ t["label-email"] }} *</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="city">Ville</label>
+                    <label for="city">{{ t["label-city"] }}</label>
                     <input type="text" id="city" name="city">
                 </div>
                 <div class="form-group">
-                    <label for="level">Niveau Python</label>
+                    <label for="level">{{ t["label-level"] }}</label>
                     <select id="level" name="level">
-                        <option value="beginner">Débutant</option>
-                        <option value="intermediate">Intermédiaire</option>
-                        <option value="advanced">Avancé</option>
+                        <option value="beginner">{{ t["level-beginner"] }}</option>
+                        <option value="intermediate">{{ t["level-intermediate"] }}</option>
+                        <option value="advanced">{{ t["level-advanced"] }}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="checkbox-label"><input type="checkbox" id="agree_privacy" name="agree_privacy" required> J'ai lu et j'accepte la <a href="/privacy" target="_blank">politique de confidentialité</a>.</label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree_privacy" name="agree_privacy" required>
+                        {{ t["agree-privacy"] }}
+                        <a href="/privacy" target="_blank">{{ t["privacy-link-text"] }}</a>.
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label class="checkbox-label"><input type="checkbox" id="agree_coc" name="agree_coc" required> J'ai lu et j'accepte le <a href="/code-of-conduct" target="_blank">Code de conduite</a>.</label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree_coc" name="agree_coc" required>
+                        {{ t["agree-coc"] }}
+                        <a href="/code-of-conduct" target="_blank">{{ t["coc-title"] }}</a>.
+                    </label>
                 </div>
-                <button type="submit" class="btn">Envoyer</button>
+                <button type="submit" class="btn">{{ t["btn-send"] }}</button>
             </form>
         </div>
     </section>
@@ -48,7 +56,7 @@ document.getElementById('join-form').addEventListener('submit', function(e){
     if (!p || !c) return; // nothing to do
     if (!p.checked || !c.checked) {
         e.preventDefault();
-        alert('Veuillez accepter la politique de confidentialité et le Code de conduite avant de continuer.');
+        alert("{{ t['consent-alert'] }}");
         return false;
     }
 });
