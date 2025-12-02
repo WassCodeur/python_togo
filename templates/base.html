@@ -3,7 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Python Togo{% endblock %}</title>
+    
+    {% set _meta_title = (meta_title if meta_title is defined else t.get('site-title','Python Togo')) %}
+    {% set _meta_desc = (meta_description if meta_description is defined else t.get('footer-about-desc','Python Togo promeut le langage de programmation Python au Togo.')) %}
+    {% set _meta_image = (meta_image if meta_image is defined else (request.url.scheme ~ '://' ~ request.url.netloc ~ '/static/images/Py.png')) %}
+    {% set _meta_type = (meta_type if meta_type is defined else 'website') %}
+    {% set _meta_robots = (meta_robots if meta_robots is defined else 'index,follow') %}
+    {% set _og_locale = ('fr_FR' if lang == 'fr' else 'en_US') %}
+    {% set _canonical = (meta_canonical if meta_canonical is defined else (request.url.scheme ~ '://' ~ request.url.netloc ~ request.url.path)) %}
+
+    <title>{% block title %}{{ _meta_title }}{% endblock %}</title>
+    <meta name="description" content="{{ _meta_desc }}">
+    <meta name="robots" content="{{ _meta_robots }}">
+    <link rel="canonical" href="{{ _canonical }}">
+
+    <meta property="og:site_name" content="Python Togo">
+    <meta property="og:title" content="{{ _meta_title }}">
+    <meta property="og:description" content="{{ _meta_desc }}">
+    <meta property="og:type" content="{{ _meta_type }}">
+    <meta property="og:url" content="{{ _canonical }}">
+    <meta property="og:image" content="{{ _meta_image }}">
+    <meta property="og:locale" content="{{ _og_locale }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@pytogo_org">
+    <meta name="twitter:title" content="{{ _meta_title }}">
+    <meta name="twitter:description" content="{{ _meta_desc }}">
+    <meta name="twitter:image" content="{{ _meta_image }}">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
     <link rel="preload" href="/static/images/Py.png" as="image" />
@@ -14,6 +40,20 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5FRXJFW9');</script>
      <!-- End Google Tag Manager -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Python Togo",
+            "url": "{{ request.url.scheme }}://{{ request.url.netloc }}",
+            "logo": "{{ request.url.scheme }}://{{ request.url.netloc }}/static/images/Py.png",
+            "sameAs": [
+                "https://x.com/pytogo_org",
+                "https://github.com/pytogo-org",
+                "https://www.youtube.com/@PythonTogo"
+            ]
+        }
+        </script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -95,13 +135,13 @@
             </div>
 
             <div class="social-links" aria-label="Réseaux sociaux">
-                        <a href="https://www.linkedin.com/company/python-togo" class="social-link" target="_blank">
+                        <!-- <a href="https://www.linkedin.com/company/python-togo" class="social-link" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"
                                 fill="currentColor">
                                 <path
                                     d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
                             </svg>
-                        </a>
+                        </a>  -->
                         <!-- Instagram (inline SVG) -->
                         <a href="https://www.instagram.com/pycontg/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                             <svg width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="social-icon" aria-hidden="true">

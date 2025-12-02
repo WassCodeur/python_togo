@@ -12,14 +12,19 @@ Notes
 - Sample data for events and news is kept in-memory for simplicity.
 """
 
+import os
+import json
 from datetime import date
 from typing import List, Optional
+from supabase import create_client, Client
+from dotenv import load_dotenv
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+from email_validator import validate_email, EmailNotValidError
 
 app = FastAPI(title="Python Togo")
 
@@ -27,7 +32,11 @@ app = FastAPI(title="Python Togo")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
+load_dotenv()
+SUBABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
+supabase: Client = create_client(SUBABASE_URL, SUPABASE_KEY)
 
 # Simple in-memory sample data
 SAMPLE_EVENTS = [
@@ -84,7 +93,6 @@ SAMPLE_NEWS = [
     {
         "id": 1,
         "date": "2025-11-01",
-        # Optional image URL for this news item; if missing, a placeholder will be used
         "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763440928/20251117_200618_tsfc73.jpg",
         "translations": {
             "fr": {
@@ -156,14 +164,6 @@ SAMPLE_NEWS = [
     },
 ]
 
-SAMPLE_COMMUNITIES = [
-    {
-        "id": 1,
-        "name": "Python Lomé",
-        "description": "Groupe local basé à Lomé.",
-        "city": "Lomé",
-    }
-]
 
 TRANSLATIONS = {
     "fr": {
@@ -873,12 +873,6 @@ class JoinRequest(BaseModel):
     interests: str | None = None
 
 
-class ContactRequest(BaseModel):
-    name: str
-    email: str
-    subject: str
-    message: str
-
 
 class PartnershipRequest(BaseModel):
     organization: str
@@ -886,15 +880,6 @@ class PartnershipRequest(BaseModel):
     email: str
     website: Optional[str] = None
     message: Optional[str] = None
-
-
-class JoinSubmit(BaseModel):
-    name: str
-    email: str
-    city: Optional[str] = None
-    level: Optional[str] = None
-    agree_privacy: bool
-    agree_coc: bool
 
 
 class ContactSubmit(BaseModel):
@@ -906,94 +891,50 @@ class ContactSubmit(BaseModel):
     agree_coc: bool
 
 
-# In-memory holders for partnership requests and partners
-PARTNERS = [
-    {
-        "name": "Python Software Foundation",
-        "website": "https://www.python.org/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/b_rgb:457FAB/c_crop,w_1000,h_563,ar_16:9,g_auto/v1750463364/psf-logo_gqppfi.png",
-    },
-    {
-        "name": "Association Francophone de Python",
-        "website": "https://www.afpy.org/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1757104352/afpy_mizqfd.png",
-    },
-    {
-        "name": "Django Software Foundation",
-        "website": "https://www.djangoproject.com/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1757104362/django-logo-positive_ziry9u.png",
-    },
-    {
-        "name": "Black Python Devs",
-        "website": "https://blackpythondevs.com/index.html",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1751558100/bpd_stacked_us5ika.png",
-    },
-    {
-        "name": "O'REILLY",
-        "website": "https://www.oreilly.com/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763335940/oreilly_logo_mark_red_efvlhr.svg",
-    },
-    {
-        "name": "GitBook",
-        "website": "https://www.gitbook.com/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763336328/GitBook_-_Dark_igckn1.png",
-    },
-    {
-        "name": "Tahaga",
-        "website": "https://tahaga.com/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1753966042/Logo_TAHAGA_02_Plan_de_travail_1_5_rh5s9g.jpg",
-    },
-    {
-        "name": "DijiJob",
-        "website": "https://wearedigijob.com",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1755176153/digijoblogo_tkbhns.png",
-    },
-    {
-        "name": "Microsoft Student Ambassadors Togo",
-        "website": "https://www.youtube.com/@mlsatogo",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1754294585/msftatogo_qrtxl9.png",
-    },
-    {
-        "name": "GitHub",
-        "website": "https://github.com/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1752712570/GitHub_Logo_pn7gcn.png",
-    },
-    {
-        "name": "Kweku Tech",
-        "website": "https://www.youtube.com/@KwekuTech",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1754092403/kwekutech_v4l7qn.png",
-    },
-    {
-        "name": "AllDotPy",
-        "website": "https://alldotpy.org/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1755768009/dotpy_blue_transparent_irvs5g.png",
-    },
-    {
-        "name": "IJEAF",
-        "website": "https://www.linkedin.com/company/ijeaf/",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1755768049/ijeaf_qjqsmf.jpg",
-    },
-    {
-        "name": "TeDxVItChannai",
-        "website": "https://www.ted.com/tedx/events/19414",
-        "logo_url": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1754246473/tedxVitchennai_d5bkda.png",
-    },
-]
-GALLERIES = [
-    {
-        "date": "2025-08-23",
-        "title": "PyCon Togo 2025",
-        "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1747588996/Group_6_r7n6id.png",
-        "link": "https://drive.google.com/drive/folders/1Xk8lejAQXBIPjPf1UHnuUmZJ5sEYNPM1?usp=sharing",
-    },
-    {
-        "date": "2024-11-30",
-        "title": "PyDay Togo 2024",
-        "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763346354/WUL_0330_rnemnd.jpg",
-        "link": "https://drive.google.com/drive/folders/1UCZgBjcAaztwCi5R74WRqI8oxbCe1DNC?usp=sharing",
-    },
-]
-PARTNERSHIP_REQUESTS: List[dict] = []
+def get_data(table):
+    """Fetch all data from a given Supabase table.
+    
+    Parameters
+    ----------
+    table : str
+        The name of the table to query.
+    
+    Returns
+    -------
+    list of dict
+        The list of records from the table, or empty list on error.
+    """
+    try:
+        response = supabase.table(table).select("*").execute()
+        return response.data
+    except Exception:
+        return []
+
+def insert_data(table, data):
+    """Insert data into a given Supabase table.
+
+    Parameters
+    ----------
+    table : str
+        The name of the table to insert into.
+    data : dict
+        The data to insert.
+    Returns
+    -------
+    bool
+        True if insertion was successful, False otherwise.
+    """
+    try:
+        supabase.table(table).insert(data).execute()
+        return True
+    except Exception as e:
+        print(f"Error inserting data into {table}: {e}")
+        return False
+
+PARTNERS = get_data("partners")
+
+GALLERIES = get_data("galleries")
+
 JOIN_REQUESTS: List[dict] = []
 CONTACT_MESSAGES: List[dict] = []
 
@@ -1347,9 +1288,33 @@ async def partnership_submit(request: PartnershipRequest):
     --------
     ``POST /api/v1/partnership`` with JSON body
     """
-    PARTNERSHIP_REQUESTS.append(request.dict())
-    # Here you would normally send an email or store the request in a DB
-    return JSONResponse(content={"status": "received"})
+    data = {}
+    ct = request.headers.get("content-type", "")
+    if "application/json" in ct:
+        data = await request.json()
+        data = PartnershipRequest(**data)
+    else:
+        form = await request.form()
+        data = dict(form)
+        data = PartnershipRequest(**data)
+    
+    try:
+       validate_email(data.email, check_deliverability=True)
+    except EmailNotValidError as e:
+        return JSONResponse(status_code=400, content={"error": "Please use a valide email"})
+
+    # Normalize boolean fields
+    agree_privacy = data.agree_privacy in (True, "true", "True", "on", "1", 1)
+    agree_coc = data.agree_coc in (True, "true", "True", "on", "1", 1)
+    if not agree_privacy or not agree_coc:
+        return JSONResponse(status_code=400, content={"error": "consent_required"})
+    
+    data = json.dumps(data.dict())
+    inserted = insert_data("partnershiprequest", data)
+    if inserted:
+        return JSONResponse(content={"status": "received"})
+    else:
+        return JSONResponse(content={"status": "Failed"})
 
 
 @app.post("/api/v1/join")
@@ -1374,19 +1339,29 @@ async def join_submit(request: Request):
     ct = request.headers.get("content-type", "")
     if "application/json" in ct:
         data = await request.json()
+        data = JoinRequest(**data)
     else:
         form = await request.form()
         data = dict(form)
+        data = JoinRequest(**data)
+    
+    try:
+       validate_email(data.email, check_deliverability=True)
+    except EmailNotValidError as e:
+        return JSONResponse(status_code=400, content={"error": "Please use a valide email"})
 
     # Normalize boolean fields
-    agree_privacy = data.get("agree_privacy") in (True, "true", "True", "on", "1", 1)
-    agree_coc = data.get("agree_coc") in (True, "true", "True", "on", "1", 1)
+    agree_privacy = data.agree_privacy in (True, "true", "True", "on", "1", 1)
+    agree_coc = data.agree_coc in (True, "true", "True", "on", "1", 1)
     if not agree_privacy or not agree_coc:
         return JSONResponse(status_code=400, content={"error": "consent_required"})
-
-    # store
-    JOIN_REQUESTS.append(data)
-    return JSONResponse(content={"status": "received"})
+    
+    data = json.dumps(data.dict())
+    inserted = insert_data("members", data)
+    if inserted:
+        return JSONResponse(content={"status": "received"})
+    else:
+        return JSONResponse(content={"status": "Failed"})
 
 
 @app.post("/api/v1/contact")
@@ -1408,19 +1383,33 @@ async def contact_submit(request: Request):
     """
     data = {}
     ct = request.headers.get("content-type", "")
+    
     if "application/json" in ct:
         data = await request.json()
+        data = ContactSubmit(**data)  # validate
     else:
         form = await request.form()
         data = dict(form)
+        data = ContactSubmit(**data)
 
-    agree_privacy = data.get("agree_privacy") in (True, "true", "True", "on", "1", 1)
-    agree_coc = data.get("agree_coc") in (True, "true", "True", "on", "1", 1)
+    try:
+       validate_email(data.email, check_deliverability=True)
+    except EmailNotValidError as e:
+        return JSONResponse(status_code=400, content={"error": "Please use a valide email"})
+    
+    agree_privacy = data.agree_coc in (True, "true", "True", "on", "1", 1)
+    agree_coc = data.agree_coc in (True, "true", "True", "on", "1", 1)
     if not agree_privacy or not agree_coc:
         return JSONResponse(status_code=400, content={"error": "consent_required"})
 
-    CONTACT_MESSAGES.append(data)
-    return JSONResponse(content={"status": "received"})
+    data = json.dumps(data.dict())
+ 
+    inserted = insert_data("contacts", data)
+    if inserted:
+        return JSONResponse(content={"status": "received"})
+    else:
+        return JSONResponse(content={"status": "Failed"})
+    
 
 
 @app.get("/gallery")
