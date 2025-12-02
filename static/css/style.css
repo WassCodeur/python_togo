@@ -39,7 +39,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 123px;
+    gap: 125px;
 }
 
 .site-logo img { display:block; width:120px; height:auto; }
