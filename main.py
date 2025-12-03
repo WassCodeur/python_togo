@@ -790,6 +790,11 @@ def get_language(request: Request) -> str:
     str
         The language code ("fr" or "en"). Defaults to "fr" if none matched.
     """
+    # 1) Query param takes precedence for SEO-friendly alternate URLs
+    query_lang = request.query_params.get("lang") or request.query_params.get("hl")
+    if query_lang in TRANSLATIONS:
+        return query_lang
+    # 2) Cookie value
     cookie_lang = request.cookies.get("lang")
     if cookie_lang in TRANSLATIONS:
         return cookie_lang
@@ -1013,7 +1018,15 @@ async def home(request: Request):
     return templates.TemplateResponse(
         name="home.html",
         request=request,
-        context=ctx(request, {"partners": PARTNERS, "news_home": news_items}),
+        context=ctx(
+            request,
+            {
+                "partners": PARTNERS,
+                "news_home": news_items,
+                "meta_title": TRANSLATIONS[lang]["home-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["footer-about-desc"],
+            },
+        ),
     )
 
 
@@ -1036,8 +1049,17 @@ async def about(request: Request):
     --------
     ``GET /about``
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
-        name="about.html", request=request, context=ctx(request)
+        name="about.html",
+        request=request,
+        context=ctx(
+            request,
+            {
+                "meta_title": TRANSLATIONS[lang]["about-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["about-blurb"],
+            },
+        ),
     )
 
 
@@ -1075,7 +1097,16 @@ async def events(request: Request):
         )
     items = sorted(items, key=lambda x: x["date"], reverse=True)
     return templates.TemplateResponse(
-        request=request, name="events.html", context=ctx(request, {"events": items})
+        request=request,
+        name="events.html",
+        context=ctx(
+            request,
+            {
+                "events": items,
+                "meta_title": TRANSLATIONS[lang]["events-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["events-sample-desc"],
+            },
+        ),
     )
 
 
@@ -1113,7 +1144,16 @@ async def event_detail(event_id: int, request: Request):
         "description": tr.get("description", ""),
     }
     return templates.TemplateResponse(
-        request=request, name="event_detail.html", context=ctx(request, {"item": item})
+        request=request,
+        name="event_detail.html",
+        context=ctx(
+            request,
+            {
+                "item": item,
+                "meta_title": item["title"] + " — Python Togo",
+                "meta_description": item["description"],
+            },
+        ),
     )
 
 
@@ -1151,7 +1191,16 @@ async def actualities(request: Request):
             }
         )
     return templates.TemplateResponse(
-        request=request, name="actualites.html", context=ctx(request, {"news": items})
+        request=request,
+        name="actualites.html",
+        context=ctx(
+            request,
+            {
+                "news": items,
+                "meta_title": TRANSLATIONS[lang]["news-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["footer-about-desc"],
+            },
+        ),
     )
 
 
@@ -1190,7 +1239,17 @@ async def news_detail(news_id: int, request: Request):
         or f"https://picsum.photos/seed/news-{found['id']}/1200/680",
     }
     return templates.TemplateResponse(
-        request=request, name="news_detail.html", context=ctx(request, {"item": item})
+        request=request,
+        name="news_detail.html",
+        context=ctx(
+            request,
+            {
+                "item": item,
+                "meta_title": item["title"] + " — Python Togo",
+                "meta_description": item["body"][:160],
+                "meta_image": item.get("image"),
+            },
+        ),
     )
 
 
@@ -1209,10 +1268,18 @@ async def partners(request: Request):
     fastapi.responses.HTMLResponse
         Rendered template response.
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
         request=request,
         name="partners.html",
-        context=ctx(request, {"partners": PARTNERS}),
+        context=ctx(
+            request,
+            {
+                "partners": PARTNERS,
+                "meta_title": TRANSLATIONS[lang]["nav-partners"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["partners-intro"],
+            },
+        ),
     )
 
 
@@ -1231,8 +1298,17 @@ async def communities(request: Request):
     fastapi.responses.HTMLResponse
         Rendered template response.
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
-        request=request, name="communities.html", context=ctx(request)
+        request=request,
+        name="communities.html",
+        context=ctx(
+            request,
+            {
+                "meta_title": TRANSLATIONS[lang]["nav-communities"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["communities-card-desc"],
+            },
+        ),
     )
 
 
@@ -1251,8 +1327,17 @@ async def join(request: Request):
     fastapi.responses.HTMLResponse
         Rendered template response.
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
-        request=request, name="join.html", context=ctx(request)
+        request=request,
+        name="join.html",
+        context=ctx(
+            request,
+            {
+                "meta_title": TRANSLATIONS[lang]["join-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["join-intro"],
+            },
+        ),
     )
 
 
@@ -1271,8 +1356,17 @@ async def contact(request: Request):
     fastapi.responses.HTMLResponse
         Rendered template response.
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
-        request=request, name="contact.html", context=ctx(request)
+        request=request,
+        name="contact.html",
+        context=ctx(
+            request,
+            {
+                "meta_title": TRANSLATIONS[lang]["contact-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["contact-intro"],
+            },
+        ),
     )
 
 
@@ -1291,8 +1385,17 @@ async def code_of_conduct(request: Request):
     fastapi.responses.HTMLResponse
         Rendered template response.
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
-        request=request, name="code_of_conduct.html", context=ctx(request)
+        request=request,
+        name="code_of_conduct.html",
+        context=ctx(
+            request,
+            {
+                "meta_title": TRANSLATIONS[lang]["coc-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["coc-intro"],
+            },
+        ),
     )
 
 
@@ -1513,8 +1616,17 @@ async def privacy(request: Request):
     fastapi.responses.HTMLResponse
         Rendered template response.
     """
+    lang = get_language(request)
     return templates.TemplateResponse(
-        request=request, name="privacy.html", context=ctx(request)
+        request=request,
+        name="privacy.html",
+        context=ctx(
+            request,
+            {
+                "meta_title": TRANSLATIONS[lang]["privacy-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["privacy-intro"],
+            },
+        ),
     )
 
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pytogo.org/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://pytogo.org/about</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/events</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/actualities</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/partners</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/communities</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/gallery</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/join</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/contact</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/privacy</loc>
+  </url>
+  <url>
+    <loc>https://pytogo.org/code-of-conduct</loc>
+  </url>
+</urlset>

@@ -3,33 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    {% set _meta_title = (meta_title if meta_title is defined else t.get('site-title','Python Togo')) %}
-    {% set _meta_desc = (meta_description if meta_description is defined else t.get('footer-about-desc','Python Togo promeut le langage de programmation Python au Togo.')) %}
+    {% set meta_title = (meta_title if meta_title is defined else t.get('site-title','Python Togo')) %}
     {% set _meta_image = (meta_image if meta_image is defined else (request.url.scheme ~ '://' ~ request.url.netloc ~ '/static/images/Py.png')) %}
-    {% set _meta_type = (meta_type if meta_type is defined else 'website') %}
-    {% set _meta_robots = (meta_robots if meta_robots is defined else 'index,follow') %}
     {% set _og_locale = ('fr_FR' if lang == 'fr' else 'en_US') %}
     {% set _canonical = (meta_canonical if meta_canonical is defined else (request.url.scheme ~ '://' ~ request.url.netloc ~ request.url.path)) %}
 
-    <title>{% block title %}{{ _meta_title }}{% endblock %}</title>
-    <meta name="description" content="{{ _meta_desc }}">
-    <meta name="robots" content="{{ _meta_robots }}">
-    <link rel="canonical" href="{{ _canonical }}">
+    <title>{% block title %}{{ meta_title }}{% endblock %}</title>
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="robots" content="index, follow, max-snippet:320, max-image-preview:large, max-video-preview:-1">
+    <meta name="theme-color" content="#121212">
+    <meta name="application-name" content="Python Togo">
+
+
+    {# hreflang alternates for SEO #}
+    <link rel="alternate" hreflang="fr" href="{{ request.url.scheme }}://{{ request.url.netloc }}{{ request.url.path }}?lang=fr">
+    <link rel="alternate" hreflang="en" href="{{ request.url.scheme }}://{{ request.url.netloc }}{{ request.url.path }}?lang=en">
+    <link rel="alternate" hreflang="x-default" href="{{ _canonical }}">
 
     <meta property="og:site_name" content="Python Togo">
-    <meta property="og:title" content="{{ _meta_title }}">
-    <meta property="og:description" content="{{ _meta_desc }}">
-    <meta property="og:type" content="{{ _meta_type }}">
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:type" content="website">
     <meta property="og:url" content="{{ _canonical }}">
     <meta property="og:image" content="{{ _meta_image }}">
     <meta property="og:locale" content="{{ _og_locale }}">
+    {% if lang == 'fr' %}
+    <meta property="og:locale:alternate" content="en_US">
+    {% else %}
+    <meta property="og:locale:alternate" content="fr_FR">
+    {% endif %}
+    <meta property="og:image:alt" content="{{ meta_title }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@pytogo_org">
-    <meta name="twitter:title" content="{{ _meta_title }}">
-    <meta name="twitter:description" content="{{ _meta_desc }}">
+    <meta name="twitter:title" content="{{ meta_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
     <meta name="twitter:image" content="{{ _meta_image }}">
+    <link rel="sitemap" type="application/xml" href="/static/sitemap.xml">
+    <link rel="apple-touch-icon" href="/static/images/Py.png">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
     <link rel="preload" href="/static/images/Py.png" as="image" />
@@ -50,7 +63,11 @@
             "sameAs": [
                 "https://x.com/pytogo_org",
                 "https://github.com/pytogo-org",
-                "https://www.youtube.com/@PythonTogo"
+                "https://www.youtube.com/@PythonTogo",
+                "https://www.instagram.com/pycontg/",
+                "https://techhub.social/@pytogo_org",
+                "https://www.pytogo.org/discord"
+
             ]
         }
         </script>
