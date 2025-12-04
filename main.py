@@ -168,7 +168,7 @@ SAMPLE_NEWS = [
 TRANSLATIONS = {
     "fr": {
         "site-title": "Python Togo",
-        "nav-home": "Accueil",
+        "nav-home": "The Python Software Community Togo",
         "nav-about": "À propos",
         "nav-code": "Code de conduite",
         "nav-events": "Événements",
@@ -489,7 +489,7 @@ TRANSLATIONS = {
     },
     "en": {
         "site-title": "Python Togo",
-        "nav-home": "Home",
+        "nav-home": "The Python Software Community Togo",
         "nav-about": "About",
         "nav-code": "Code of Conduct",
         "nav-events": "Events",
