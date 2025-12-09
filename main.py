@@ -168,7 +168,7 @@ SAMPLE_NEWS = [
 TRANSLATIONS = {
     "fr": {
         "site-title": "Python Togo",
-        "nav-home": "The Python Software Community Togo",
+        "nav-home": "Accueil",
         "nav-about": "À propos",
         "nav-code": "Code de conduite",
         "nav-events": "Événements",
@@ -1628,6 +1628,40 @@ async def privacy(request: Request):
             },
         ),
     )
+
+
+# redirections
+
+app.get("/favicon.ico")(lambda: RedirectResponse(url="/static/images/Py.png"))
+app.get("/discord")(
+    lambda: RedirectResponse(url="https://discord.gg/RP76qhwrNY", status_code=301)
+)
+app.get("/linkedin")(
+    lambda: RedirectResponse(
+        url="https://www.linkedin.com/company/pythontogo/", status_code=301
+    )
+)
+app.get("/twitter")(
+    lambda: RedirectResponse(url="https://x.com/pytogo_org", status_code=301)
+)
+app.get("/x")(lambda: RedirectResponse(url="https://x.com/pytogo_org", status_code=301))
+app.get("/instagram")(
+    lambda: RedirectResponse(url="https://www.instagram.com/pycontg/", status_code=301)
+)
+app.get("/x")(lambda: RedirectResponse(url="https://x.com/pytogo_org", status_code=301))
+app.get("/facebook")(
+    lambda: RedirectResponse(
+        url="https://www.facebook.com/share/1DA5jFdhbp/", status_code=301
+    )
+)
+app.get("/mastodon")(
+    lambda: RedirectResponse(url="https://techhub.social/@pytogo_org", status_code=301)
+)
+app.get("/meet")(
+    lambda: RedirectResponse(
+        url="https://meet.google.com/mnt-zerh-oqw", status_code=301
+    )
+)
 
 
 if __name__ == "__main__":
