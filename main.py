@@ -26,9 +26,15 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from supabase import Client, create_client
 
-app = FastAPI(title="Python Togo")
+app = FastAPI(
+    summary="Python Togo official website.",
+    description="The Python Software Community Togo's official website.",
+    docs_url=None,
+    redoc_url=None,
+    title="Python Togo",
+    version="1.0.0",
+)
 
-# Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
@@ -486,6 +492,21 @@ TRANSLATIONS = {
         "communities-card-desc": (
             "Groupe local basé à Lomé, rencontre mensuelle et ateliers."
         ),
+        "error-404-title": "Page non trouvée",
+        "error-404-heading": "Erreur 404",
+        "error-404-message": "Désolé, la page que vous recherchez n'existe pas.",
+        "error-404-home": "Retour à l'accueil",
+        "error-500-title": "Erreur serveur",
+        "error-500-heading": "Erreur 500",
+        "error-500-message": (
+            "Une erreur interne s'est produite. Veuillez réessayer plus tard."
+        ),
+        "error-403-title": "Accès interdit",
+        "error-403-heading": "Erreur 403",
+        "error-403-message": "Vous n'avez pas la permission d'accéder à cette page.",
+        "error-generic-title": "Erreur",
+        "error-generic-heading": "Une erreur s'est produite",
+        "error-generic-message": "Quelque chose s'est mal passé. Veuillez réessayer.",
     },
     "en": {
         "site-title": "Python Togo",
@@ -771,9 +792,177 @@ TRANSLATIONS = {
         "communities-card-desc": (
             "Local group based in Lomé, monthly meetups and workshops."
         ),
+        "error-404-title": "Page not found",
+        "error-404-heading": "Error 404",
+        "error-404-message": "Sorry, the page you are looking for does not exist.",
+        "error-404-home": "Back to home",
+        "error-500-title": "Server error",
+        "error-500-heading": "Error 500",
+        "error-500-message": "An internal error occurred. Please try again later.",
+        "error-403-title": "Access forbidden",
+        "error-403-heading": "Error 403",
+        "error-403-message": "You do not have permission to access this page.",
+        "error-generic-title": "Error",
+        "error-generic-heading": "An error occurred",
+        "error-generic-message": "Something went wrong. Please try again.",
     },
 }
 DONATE_URL = "https://www.paypal.com/donate/?hosted_button_id=A6547S7YGMZ4A"
+
+
+@app.exception_handler(404)
+async def not_found_handler(request: Request, exc: HTTPException):
+    """Handle 404 errors with a custom bilingual page.
+
+    Parameters
+    ----------
+    request : fastapi.Request
+        The incoming HTTP request.
+    exc : fastapi.HTTPException
+        The HTTP exception that was raised. Contains status code and detail.
+    Returns
+    -------
+    fastapi.responses.TemplateResponse
+        The rendered 404 error page with appropriate context.
+    """
+    lang = get_language(request)
+    return templates.TemplateResponse(
+        request=request,
+        name="error.html",
+        status_code=404,
+        context=ctx(
+            request,
+            {
+                "status_code": 404,
+                "title_key": "error-404-title",
+                "heading_key": "error-404-heading",
+                "message_key": "error-404-message",
+                "detail": None,
+                "meta_title": TRANSLATIONS[lang]["error-404-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["error-404-message"],
+            },
+        ),
+    )
+
+
+@app.exception_handler(500)
+async def internal_error_handler(request: Request, exc: Exception):
+    """Handle 500 errors with a custom bilingual page.
+
+    Parameters
+    ----------
+    request : fastapi.Request
+        The incoming HTTP request.
+    exc : Exception
+        The exception that was raised.
+    Returns
+    -------
+    fastapi.responses.TemplateResponse
+        The rendered 500 error page with appropriate context.
+    """
+    lang = get_language(request)
+    return templates.TemplateResponse(
+        request=request,
+        name="error.html",
+        status_code=500,
+        context=ctx(
+            request,
+            {
+                "status_code": 500,
+                "title_key": "error-500-title",
+                "heading_key": "error-500-heading",
+                "message_key": "error-500-message",
+                "detail": None,
+                "meta_title": TRANSLATIONS[lang]["error-500-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["error-500-message"],
+            },
+        ),
+    )
+
+
+@app.exception_handler(403)
+async def forbidden_handler(request: Request, exc: HTTPException):
+    """Handle 403 errors with a custom bilingual page.
+
+    Parameters
+    ----------
+    request : fastapi.Request
+        The incoming HTTP request.
+    exc : fastapi.HTTPException
+        The HTTP exception that was raised. Contains status code and detail.
+    Returns
+    -------
+    fastapi.responses.TemplateResponse
+        The rendered 403 error page with appropriate context.
+    """
+    lang = get_language(request)
+    return templates.TemplateResponse(
+        request=request,
+        name="error.html",
+        status_code=403,
+        context=ctx(
+            request,
+            {
+                "status_code": 403,
+                "title_key": "error-403-title",
+                "heading_key": "error-403-heading",
+                "message_key": "error-403-message",
+                "detail": None,
+                "meta_title": TRANSLATIONS[lang]["error-403-title"] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang]["error-403-message"],
+            },
+        ),
+    )
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """Handle generic HTTP exceptions with a custom bilingual page.
+    Parameters
+    ----------
+    request : fastapi.Request
+        The incoming HTTP request.
+    exc : fastapi.HTTPException
+        The HTTP exception that was raised. Contains status code and detail.
+    Returns
+    -------
+    fastapi.responses.TemplateResponse
+        The rendered error page with appropriate status code and context.
+    """
+    lang = get_language(request)
+
+    error_map = {
+        404: ("error-404-title", "error-404-heading", "error-404-message"),
+        403: ("error-403-title", "error-403-heading", "error-403-message"),
+        500: ("error-500-title", "error-500-heading", "error-500-message"),
+    }
+
+    if exc.status_code in error_map:
+        title_key, heading_key, message_key = error_map[exc.status_code]
+    else:
+        title_key, heading_key, message_key = (
+            "error-generic-title",
+            "error-generic-heading",
+            "error-generic-message",
+        )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="error.html",
+        status_code=exc.status_code,
+        context=ctx(
+            request,
+            {
+                "status_code": exc.status_code,
+                "title_key": title_key,
+                "heading_key": heading_key,
+                "message_key": message_key,
+                "detail": exc.detail if hasattr(exc, "detail") else None,
+                "meta_title": TRANSLATIONS[lang][title_key] + " — Python Togo",
+                "meta_description": TRANSLATIONS[lang][message_key],
+            },
+        ),
+    )
 
 
 def get_language(request: Request) -> str:

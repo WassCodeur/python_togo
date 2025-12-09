@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t[title_key] }} — {{ t['site-title'] }}{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin-top: 10px; margin-bottom: 10px; text-align: center;">
+    <div >
+        <div style="font-size: 120px; font-weight: bold; color: #056D1E; margin-bottom: 10px;">
+            {{ status_code }}
+        </div>
+        <h1 style="font-size: 2.5rem; color: #333; margin-bottom: 20px;">
+            {{ t[heading_key] }}
+        </h1>
+        <p style="font-size: 1.2rem; color: #666; margin-bottom: 10px;">
+            {{ t[message_key] }}
+        </p>
+        {% if detail %}
+        <p style="font-size: 1rem; color: #999; margin-bottom: 20px; font-style: italic;">
+            {{ detail }}
+        </p>
+        {% endif %}
+        <div style="margin-top: 40px;">
+            <a href="/"
+               style="display: inline-block;
+                      background-color: #056D1E;
+                      color: white;
+                      padding: 12px 30px;
+                      text-decoration: none;
+                      border-radius: 5px;
+                      font-size: 1.1rem;
+                      transition: background-color 0.3s;">
+                {{ t['error-404-home'] }}
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
