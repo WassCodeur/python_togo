@@ -1851,6 +1851,12 @@ app.get("/meet")(
         url="https://meet.google.com/mnt-zerh-oqw", status_code=301
     )
 )
+app.get("/github")(
+    lambda: RedirectResponse(url="https://github.com/python-togo", status_code=301)
+)
+app.get("/youtube")(
+    lambda: RedirectResponse(url="https://www.youtube.com/@PythonTogo", status_code=301)
+)
 
 
 if __name__ == "__main__":
