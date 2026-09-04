@@ -45,100 +45,57 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUBABASE_URL, SUPABASE_KEY)
 
 # Simple in-memory sample data
-SAMPLE_EVENTS = [
+EVENTS = [
     {
         "id": 1,
-        "date": "2025-12-05",
+        "date": "2024-11-30",
         "location": "Lomé",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/paydaytogo2024.avif",
+        "link": "https://luma.com/runpiv8k",
         "translations": {
             "fr": {
-                "title": "Atelier Python débutant",
-                "description": "Introduction à Python pour les nouveaux développeurs.",
-            },
-            "en": {
-                "title": "Beginner Python workshop",
-                "description": "Introduction to Python for new developers.",
-            },
-        },
-    },
-    {
-        "id": 3,
-        "date": "2025-07-20  to 2025-08-22",
-        "location": "Lomé",
-        "translations": {
-            "fr": {
-                "title": "Challenge 30 jours de code Python",
+                "title": "PyDay Togo 2024",
                 "description": (
-                    "Challenge d'introduction à Python pour les nouveaux développeurs."
+                    "Premier grand événement de la communauté Python Togo, "
+                    "également connu comme PyCon Africa Extended – Togo 2024. "
+                    "Une journée consacrée à Python, au partage de connaissances, "
+                    "à l'open source et au développement de la communauté Python au Togo. "
+                    "L'événement a réuni plus de 150 participants."
                 ),
             },
             "en": {
-                "title": "30 Days of Python Code Challenge",
-                "description": "Introductory Python challenge for new developers.",
+                "title": "PyDay Togo 2024",
+                "description": (
+                    "The first major event of the Python Togo community, also known "
+                    "as PyCon Africa Extended – Togo 2024. A day dedicated to Python, "
+                    "knowledge sharing, open source and growing the Python community "
+                    "in Togo. The event brought together more than 150 participants."
+                ),
             },
         },
     },
     {
         "id": 2,
-        "date": "2026-01-20",
+        "date": "2025-07-20 to 2025-08-22",
         "location": "Lomé",
+        "image": " https://ik.imagekit.io/foscyymdh/pythontogo/30daysofpython2025.jpeg",
+        "link": "https://challenge.pytogo.org/",
         "translations": {
             "fr": {
-                "title": "Data Science avec Python",
-                "description": "Atelier sur les bases de la data science.",
-            },
-            "en": {
-                "title": "Data Science with Python",
-                "description": "Workshop on the basics of data science.",
-            },
-        },
-    },
-]
-
-SAMPLE_NEWS = [
-    {
-        "id": 1,
-        "date": "2025-11-01",
-        "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763440928/20251117_200618_tsfc73.jpg",
-        "translations": {
-            "fr": {
-                "title": "Lancement d'un nouvel atelier Python",
-                "excerpt": "Nous organisons un atelier sur les bases de Python.",
-                "body": (
-                    "Rejoignez-nous pour un atelier d'introduction à Python, destiné "
-                    "aux débutants. Détails, date et inscription seront "
-                    "communiqués prochainement."
+                "title": "30 Days of Python 2025",
+                "description": (
+                    "Challenge communautaire d'apprentissage de Python organisé "
+                    "dans le cadre de la préparation de PyCon Togo 2025. "
+                    "Le programme accompagnait les participants dans leur découverte "
+                    "et leur pratique quotidienne de Python."
                 ),
             },
             "en": {
-                "title": "Launching a new Python workshop",
-                "excerpt": "We are organizing a beginner-friendly Python workshop.",
-                "body": (
-                    "Join us for an introductory Python workshop for newcomers. "
-                    "Details, date, and registration will be shared soon."
-                ),
-            },
-        },
-    },
-    {
-        "id": 2,
-        "date": "2025-09-15",
-        "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1763440928/20251117_200618_tsfc73.jpg",
-        "translations": {
-            "fr": {
-                "title": "Rencontre communautaire à Lomé",
-                "excerpt": "Retour sur la rencontre mensuelle.",
-                "body": (
-                    "Compte-rendu de notre dernière rencontre communautaire à Lomé "
-                    "avec les ressources partagées et les annonces."
-                ),
-            },
-            "en": {
-                "title": "Community meetup in Lomé",
-                "excerpt": "Recap of the monthly meetup.",
-                "body": (
-                    "A recap of our latest community meetup in Lomé with shared "
-                    "resources and announcements."
+                "title": "30 Days of Python 2025",
+                "description": (
+                    "A community Python learning challenge organized as part of "
+                    "the preparation for PyCon Togo 2025. The program helped "
+                    "participants learn and practice Python on a daily basis."
                 ),
             },
         },
@@ -146,24 +103,224 @@ SAMPLE_NEWS = [
     {
         "id": 3,
         "date": "2025-08-23",
-        "image": "https://res.cloudinary.com/dvg7vky5o/image/upload/v1747588996/Group_6_r7n6id.png",
+        "location": "Lomé",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/pycontg2025.png",
+        "link": "https://pycon.pytogo.org/2025",
         "translations": {
             "fr": {
-                "title": "Rapport de la PyCon Togo 2025",
-                "excerpt": "Retour sur la PyCon Togo 2025.",
-                "body": (
-                    "Compte-rendu de la PyCon Togo 2025 avec les ressources "
-                    "partagées et les annonces. "
-                    "lire plus: https://report.pytogo.org/rapport-de-la-pycon-togo-2025"
+                "title": "PyCon Togo 2025",
+                "description": (
+                    "Première édition de PyCon Togo, la conférence nationale "
+                    "de la communauté Python au Togo. L'événement a réuni "
+                    "développeurs, étudiants, professionnels et passionnés "
+                    "autour de Python, de l'open source, du développement logiciel "
+                    "et du partage de connaissances."
                 ),
             },
             "en": {
-                "title": "PyCon Togo 2025 Report",
-                "excerpt": "Recap of the PyCon Togo 2025.",
+                "title": "PyCon Togo 2025",
+                "description": (
+                    "The first edition of PyCon Togo, the national conference "
+                    "of the Python community in Togo. The event brought together "
+                    "developers, students, professionals and enthusiasts around "
+                    "Python, open source, software development and knowledge sharing."
+                ),
+            },
+        },
+    },
+    {
+        "id": 4,
+        "date": "2026-06-01 to 2026-06-30",
+        "location": "En ligne",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/Slide%2016_9%20-%205%20(3).png",
+        "link": "https://pycon.pytogo.org/2026/road-to-pycon",
+        "translations": {
+            "fr": {
+                "title": "Road to PyCon Togo 2026",
+                "description": (
+                    "Série de rencontres et de lives en ligne organisée en amont "
+                    "de PyCon Togo 2026. Les épisodes abordent notamment Python, "
+                    "l'employabilité, l'entrepreneuriat, l'open source et la construction "
+                    "de communautés technologiques durables."
+                ),
+            },
+            "en": {
+                "title": "Road to PyCon Togo 2026",
+                "description": (
+                    "A series of online talks and live sessions organized ahead "
+                    "of PyCon Togo 2026. Episodes covered Python, employability, "
+                    "entrepreneurship, open source and building sustainable technology communities."
+                ),
+            },
+        },
+    },
+    {
+        "id": 5,
+        "date": "2026-07-01 to 2026-07-30",
+        "location": "En ligne",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/30daysofpythpn.jpeg",
+        "link": "https://pycon.pytogo.org/2026/30days",
+        "translations": {
+            "fr": {
+                "title": "30 Days of Python 2026",
+                "description": (
+                    "Challenge communautaire permettant aux participants de découvrir "
+                    "et pratiquer Python pendant 30 jours, dans le cadre de la Road to "
+                    "PyCon Togo 2026."
+                ),
+            },
+            "en": {
+                "title": "30 Days of Python 2026",
+                "description": (
+                    "A community challenge designed to help participants learn "
+                    "and practice Python for 30 days as part of the Road to "
+                    "PyCon Togo 2026 initiative."
+                ),
+            },
+        },
+    },
+    {
+        "id": 6,
+        "date": "2026-08-28 to 2026-08-30",
+        "location": "Lomé",
+        "image": "https://ik.imagekit.io/foscyymdh/images/hoodoe%20art%20-%201.png",
+        "link": "https://pycon.pytogo.org/2026",
+        "translations": {
+            "fr": {
+                "title": "PyCon Togo 2026",
+                "description": (
+                    "Deuxième édition de la conférence nationale Python au Togo. "
+                    "PyCon Togo réunit développeurs, étudiants, professionnels, "
+                    "entrepreneurs et passionnés autour de Python, de l'open source, "
+                    "du développement logiciel, de l'intelligence artificielle "
+                    "et de l'innovation."
+                ),
+            },
+            "en": {
+                "title": "PyCon Togo 2026",
+                "description": (
+                    "The second edition of Togo's national Python conference. "
+                    "PyCon Togo brings together developers, students, professionals, "
+                    "entrepreneurs and enthusiasts around Python, open source, "
+                    "software development, artificial intelligence and innovation."
+                ),
+            },
+        },
+    },
+]
+
+
+NEWS = [
+    {
+        "id": 1,
+        "date": "2025-05-30",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/8f1977e0-7bb6-4ce0-9b42-4c5603b8df6c.webp",
+        "link": "https://blog.pytogo.org/the-story-of-python-togo-building-a-strong-python-community-in-togo",
+        "translations": {
+            "fr": {
+                "title": "L'histoire de Python Togo : construire une communauté Python forte au Togo",
+                "excerpt": (
+                    "Découvrez l'histoire de Python Togo, de ses débuts jusqu'à "
+                    "la création de PyDay Togo et la préparation de PyCon Togo."
+                ),
                 "body": (
-                    "A recap of the PyCon Togo 2025 with shared resources and "
-                    "announcements. "
-                    "read more: https://report.pytogo.org"
+                    "Cet article raconte l'histoire de Python Togo, depuis les "
+                    "premières expériences communautaires jusqu'à la création "
+                    "d'une communauté Python structurée au Togo. Il revient sur "
+                    "PyCon Africa 2024, la naissance de Python Togo, PyDay Togo 2024 "
+                    "et les premières étapes vers PyCon Togo. "
+                    "Lire l'article : "
+                    "https://blog.pytogo.org/the-story-of-python-togo-building-a-strong-python-community-in-togo"
+                ),
+            },
+            "en": {
+                "title": "The Story of Python Togo: Building a Strong Python Community in Togo",
+                "excerpt": (
+                    "Discover the story of Python Togo, from its early beginnings "
+                    "to PyDay Togo and the creation of a stronger Python community."
+                ),
+                "body": (
+                    "This article tells the story of Python Togo, from its early "
+                    "community experiences to the creation of a structured Python "
+                    "community in Togo. It covers PyCon Africa 2024, the birth of "
+                    "Python Togo, PyDay Togo 2024 and the first steps toward PyCon Togo. "
+                    "Read the article: "
+                    "https://blog.pytogo.org/the-story-of-python-togo-building-a-strong-python-community-in-togo"
+                ),
+            },
+        },
+    },
+    {
+        "id": 2,
+        "date": "2026-04-18",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/Slide%2016_9%20-%205%20(3).png",
+        "link": "https://blog.pytogo.org/from-zero-to-pycon-building-python-togo-against-the-odds",
+        "translations": {
+            "fr": {
+                "title": "De zéro à PyCon : construire Python Togo malgré les obstacles",
+                "excerpt": (
+                    "L'histoire de la construction de Python Togo et les défis "
+                    "rencontrés pour faire émerger une communauté Python nationale."
+                ),
+                "body": (
+                    "En 2024, Python Togo n'existait pas encore en tant que communauté "
+                    "structurée. Cet article revient sur le chemin parcouru, les défis "
+                    "rencontrés et les efforts qui ont conduit à la création de PyCon Togo. "
+                    "Lire l'article : "
+                    "https://blog.pytogo.org/from-zero-to-pycon-building-python-togo-against-the-odds"
+                ),
+            },
+            "en": {
+                "title": "From Zero to PyCon: Building Python Togo Against the Odds",
+                "excerpt": (
+                    "The story of building Python Togo and the challenges faced "
+                    "while creating a national Python community."
+                ),
+                "body": (
+                    "In 2024, Python Togo did not yet exist as a structured community. "
+                    "This article looks back at the journey, the challenges faced and "
+                    "the work that eventually led to PyCon Togo. "
+                    "Read the article: "
+                    "https://blog.pytogo.org/from-zero-to-pycon-building-python-togo-against-the-odds"
+                ),
+            },
+        },
+    },
+    {
+        "id": 3,
+        "date": "2026-04-18",
+        "image": "https://ik.imagekit.io/foscyymdh/pythontogo/bf9ed902-5a7c-41c9-b9da-7a605444c899.webp",
+        "link": "https://blog.pytogo.org/building-pycon-togo-2026-what-were-learning-from-pycon-colombia",
+        "translations": {
+            "fr": {
+                "title": "Construire PyCon Togo 2026 : ce que nous apprenons de PyCon Colombia",
+                "excerpt": (
+                    "Les enseignements de PyCon Colombia pour construire une "
+                    "édition encore plus forte de PyCon Togo."
+                ),
+                "body": (
+                    "Dans le cadre de la préparation de PyCon Togo 2026, nous "
+                    "observons les pratiques d'autres communautés Python afin "
+                    "d'améliorer notre organisation. Cet article présente les "
+                    "enseignements tirés de PyCon Colombia et leur application "
+                    "au contexte de Python Togo. "
+                    "Lire l'article : "
+                    "https://blog.pytogo.org/building-pycon-togo-2026-what-were-learning-from-pycon-colombia"
+                ),
+            },
+            "en": {
+                "title": "Building PyCon Togo 2026: What We're Learning from PyCon Colombia",
+                "excerpt": (
+                    "Lessons from PyCon Colombia that are helping us build "
+                    "a stronger PyCon Togo 2026."
+                ),
+                "body": (
+                    "As we prepare for PyCon Togo 2026, we are looking at other "
+                    "Python communities to improve our organization. This article "
+                    "explores lessons from PyCon Colombia and how they can be "
+                    "applied to the Python Togo community. "
+                    "Read the article: "
+                    "https://blog.pytogo.org/building-pycon-togo-2026-what-were-learning-from-pycon-colombia"
                 ),
             },
         },
@@ -807,7 +964,7 @@ TRANSLATIONS = {
         "error-generic-message": "Something went wrong. Please try again.",
     },
 }
-DONATE_URL = "https://www.paypal.com/donate/?hosted_button_id=A6547S7YGMZ4A"
+DONATE_URL = "https://pycon.pytogo.org/donate"
 
 
 @app.exception_handler(404)
@@ -980,7 +1137,8 @@ def get_language(request: Request) -> str:
         The language code ("fr" or "en"). Defaults to "fr" if none matched.
     """
     # 1) Query param takes precedence for SEO-friendly alternate URLs
-    query_lang = request.query_params.get("lang") or request.query_params.get("hl")
+    query_lang = request.query_params.get(
+        "lang") or request.query_params.get("hl")
     if query_lang in TRANSLATIONS:
         return query_lang
     # 2) Cookie value
@@ -1190,9 +1348,10 @@ async def home(request: Request):
     """
     lang = get_language(request)
     news_items = []
-    for n in SAMPLE_NEWS:
+    for n in NEWS:
         tr = n.get("translations", {}).get(lang, {})
-        img = n.get("image") or f"https://picsum.photos/seed/news-{n['id']}/600/340"
+        img = n.get(
+            "image") or f"https://picsum.photos/seed/news-{n['id']}/600/340"
         news_items.append(
             {
                 "id": n["id"],
@@ -1273,13 +1432,15 @@ async def events(request: Request):
     """
     lang = get_language(request)
     items = []
-    for e in SAMPLE_EVENTS:
+    for e in EVENTS:
         tr = e.get("translations", {}).get(lang, {})
         items.append(
             {
                 "id": e["id"],
                 "date": e["date"],
                 "location": e.get("location", ""),
+                "image": e.get("image", "https://ik.imagekit.io/foscyymdh/pythontogo/Banni%C3%A8res%20YouTube%20-%20Python%20Software%20Community%20(1).png"),
+                "link": e.get("link", "https://www.pytogo.org/"),
                 "title": tr.get("title", ""),
                 "description": tr.get("description", ""),
             }
@@ -1321,7 +1482,7 @@ async def event_detail(event_id: int, request: Request):
     ``GET /events/1``
     """
     lang = get_language(request)
-    found = next((e for e in SAMPLE_EVENTS if e["id"] == event_id), None)
+    found = next((e for e in EVENTS if e["id"] == event_id), None)
     if not found:
         raise HTTPException(status_code=404, detail="Event not found")
     tr = found.get("translations", {}).get(lang, {})
@@ -1367,9 +1528,10 @@ async def actualities(request: Request):
     """
     lang = get_language(request)
     items = []
-    for n in SAMPLE_NEWS:
+    for n in NEWS:
         tr = n.get("translations", {}).get(lang, {})
-        img = n.get("image") or f"https://picsum.photos/seed/news-{n['id']}/600/340"
+        img = n.get(
+            "image") or f"https://picsum.photos/seed/news-{n['id']}/600/340"
         items.append(
             {
                 "id": n["id"],
@@ -1415,7 +1577,7 @@ async def news_detail(news_id: int, request: Request):
     ``GET /actualities/2``
     """
     lang = get_language(request)
-    found = next((n for n in SAMPLE_NEWS if n["id"] == news_id), None)
+    found = next((n for n in NEWS if n["id"] == news_id), None)
     if not found:
         raise HTTPException(status_code=404, detail="News not found")
     tr = found.get("translations", {}).get(lang, {})
@@ -1823,7 +1985,8 @@ async def privacy(request: Request):
 
 app.get("/favicon.ico")(lambda: RedirectResponse(url="/static/images/Py.png"))
 app.get("/discord")(
-    lambda: RedirectResponse(url="https://discord.gg/RP76qhwrNY", status_code=301)
+    lambda: RedirectResponse(
+        url="https://discord.gg/RP76qhwrNY", status_code=301)
 )
 app.get("/linkedin")(
     lambda: RedirectResponse(
@@ -1835,7 +1998,8 @@ app.get("/twitter")(
 )
 app.get("/x")(lambda: RedirectResponse(url="https://x.com/pytogo_org", status_code=301))
 app.get("/instagram")(
-    lambda: RedirectResponse(url="https://www.instagram.com/pycontg/", status_code=301)
+    lambda: RedirectResponse(
+        url="https://www.instagram.com/pycontg/", status_code=301)
 )
 app.get("/x")(lambda: RedirectResponse(url="https://x.com/pytogo_org", status_code=301))
 app.get("/facebook")(
@@ -1844,7 +2008,8 @@ app.get("/facebook")(
     )
 )
 app.get("/mastodon")(
-    lambda: RedirectResponse(url="https://techhub.social/@pytogo_org", status_code=301)
+    lambda: RedirectResponse(
+        url="https://techhub.social/@pytogo_org", status_code=301)
 )
 app.get("/meet")(
     lambda: RedirectResponse(
@@ -1852,10 +2017,12 @@ app.get("/meet")(
     )
 )
 app.get("/github")(
-    lambda: RedirectResponse(url="https://github.com/python-togo", status_code=301)
+    lambda: RedirectResponse(
+        url="https://github.com/python-togo", status_code=301)
 )
 app.get("/youtube")(
-    lambda: RedirectResponse(url="https://www.youtube.com/@PythonTogo", status_code=301)
+    lambda: RedirectResponse(
+        url="https://www.youtube.com/@PythonTogo", status_code=301)
 )
 
 
