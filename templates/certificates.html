@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ t.get('certificates-page-title', 'Python Togo Certificates') }}{% endblock %}
+
+{% block content %}
+<section class="container program-page">
+    <div class="programs-hero">
+        <span class="eyebrow">{{ t.get('education-certificates', 'Certificates') }}</span>
+        <h1>{{ t.get('certificates-hero-title', 'Certificates') }}</h1>
+        <p>
+            {{ t.get('certificates-hero-description', 'Python Togo provides certificates of completion to participants who successfully fulfill the requirements of its structured educational programs.') }}
+        </p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="program-section certification-box">
+        <h2>{{ t.get('certificates-policy', 'Certificate policy') }}</h2>
+        <p>{{ t.get('certificates-policy-text-1', 'Certificates are awarded after successful completion. Requirements may include participation, assignments, projects, mentor feedback, practical work, or other program-specific criteria.') }}</p>
+        <p>{{ t.get('certificates-policy-text-2', 'Certificate eligibility depends on fulfilling the requirements of the relevant program.') }}</p>
+    </div>
+
+    <div class="program-section">
+        <h2>{{ t.get('certificates-linked', 'Programs associated with certificates') }}</h2>
+        <ul class="check-list">
+            {% for program in programs %}
+            <li><strong>{{ program.name }}</strong> — {{ program.certificate }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

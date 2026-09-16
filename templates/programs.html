@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ t.get('programs-page-title', 'Educational Programs') }} - Python Togo{% endblock %}
+
+{% block content %}
+<section class="container programs-page">
+    <div class="programs-hero">
+        <span class="eyebrow">{{ t.get('nav-programs', 'Programs') }}</span>
+        <h1>{{ t.get('programs-hero-title', 'Python Togo Educational Programs') }}</h1>
+        <p>
+            {{ t.get('programs-hero-description', 'Python Togo offers structured learning opportunities designed to help learners build practical programming, software engineering, and technology skills through community-led education, mentorship, peer learning, and project-based training.') }}
+        </p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="program-grid">
+        {% for program in programs %}
+        <article class="program-card">
+            <div class="program-card-header">
+                <span class="badge">{{ program.duration }}</span>
+                <h2>{{ program.name }}</h2>
+            </div>
+            <p>{{ program.short_description }}</p>
+            <ul class="program-meta-list">
+                <li><strong>{{ t.get('programs-card-type', 'Type:') }}</strong> {{ program.type }}</li>
+                <li><strong>{{ t.get('programs-card-audience', 'Audience:') }}</strong> {{ program.audience }}</li>
+                <li><strong>{{ t.get('programs-card-focus', 'Learning focus:') }}</strong> {{ program.focus }}</li>
+                <li><strong>{{ t.get('programs-card-certification', 'Certification:') }}</strong> {{ program.certificate }}</li>
+            </ul>
+            <div class="card-actions">
+                <a class="btn" href="{{ program.url }}">{{ t.get('programs-card-view', 'View program') }}</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
