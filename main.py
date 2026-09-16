@@ -333,6 +333,83 @@ TRANSLATIONS = {
         "site-title": "Python Togo",
         "nav-home": "Accueil",
         "nav-about": "À propos",
+        "nav-programs": "Programmes",
+        "programs-page-title": "Programmes éducatifs",
+        "programs-hero-title": "Programmes éducatifs de Python Togo",
+        "programs-hero-description": (
+            "Python Togo propose des parcours d'apprentissage structurés pour aider "
+            "les apprenants à développer des compétences pratiques en programmation, "
+            "en ingénierie logicielle et en technologies grâce à l'éducation "
+            "communautaire, le mentorat, l'apprentissage entre pairs et la formation "
+            "par projet."
+        ),
+        "programs-card-type": "Type :",
+        "programs-card-audience": "Public :",
+        "programs-card-focus": "Focus d'apprentissage :",
+        "programs-card-certification": "Certification :",
+        "programs-card-view": "Voir le programme",
+        "programs-view-all": "Voir tous les programmes",
+        "programs-education-overview": "Vue d'ensemble de l'éducation",
+        "education-page-title": "Éducation à Python Togo",
+        "education-hero-title": "Éducation à Python Togo",
+        "education-hero-description": (
+            "Python Togo propose une éducation technique portée par la communauté "
+            "à travers des programmes structurés, le mentorat, la formation pratique, "
+            "l'apprentissage entre pairs et le travail sur projet. Nos programmes "
+            "s'adressent à des apprenants à différents niveaux, depuis les débutants "
+            "qui découvrent Python jusqu'aux futurs ingénieurs logiciels qui développent "
+            "des compétences concrètes en développement logiciel, cloud, DevOps et "
+            "technologies émergentes."
+        ),
+        "education-our-programs": "Nos programmes éducatifs",
+        "education-learn-more": "En savoir plus",
+        "education-philosophy": "Philosophie d'apprentissage",
+        "education-practical": "Apprentissage pratique",
+        "education-community": "Éducation portée par la communauté",
+        "education-collaboration": "Collaboration entre pairs",
+        "education-mentorship": "Mentorat",
+        "education-open-source": "Culture open source",
+        "education-projects": "Développement par projet",
+        "education-continuous": "Apprentissage continu",
+        "education-accessible": "Éducation technique accessible",
+        "education-certificates": "Certificats",
+        "education-certificates-desc": "Python Togo délivre des certificats de réussite aux participants qui remplissent avec succès les exigences de ses programmes éducatifs.",
+        "education-certificates-link": "En savoir plus sur les certificats",
+        "certificates-page-title": "Certificats de Python Togo",
+        "certificates-hero-title": "Certificats",
+        "certificates-hero-description": (
+            "Python Togo délivre des certificats de réussite aux participants "
+            "qui remplissent avec succès les exigences de ses programmes éducatifs "
+            "structurés."
+        ),
+        "certificates-policy": "Politique des certificats",
+        "certificates-policy-text-1": "Les certificats sont remis après l'achèvement réussi du programme. Les exigences peuvent inclure la participation, les travaux, les projets, les retours des mentors, le travail pratique ou d'autres critères spécifiques au programme.",
+        "certificates-policy-text-2": "L'éligibilité au certificat dépend du respect des exigences du programme concerné.",
+        "certificates-linked": "Programmes associés aux certificats",
+        "program-detail-duration": "Durée",
+        "program-detail-type": "Type",
+        "program-detail-audience": "Public cible",
+        "program-detail-focus": "Focus d'apprentissage",
+        "program-detail-learning-topics": "Sujets d'apprentissage",
+        "program-detail-learning-approach": "Approche d'apprentissage",
+        "program-detail-completion": "Fin du programme et certification",
+        "program-detail-completion-text": "Les participants qui complètent avec succès les exigences du programme reçoivent un certificat de réussite délivré par Python Togo.",
+        "program-detail-model": "Modèle du programme",
+        "program-detail-participants": "Participants visés",
+        "program-detail-structure": "Structure du programme",
+        "program-detail-phase-1": "Phase 1 : Fondations techniques de base",
+        "program-detail-phase-2": "Phase 2 : Stage pratique / Ingénierie appliquée",
+        "program-detail-phase-3": "Phase 3 : Parcours de spécialisation",
+        "program-detail-learning-outcomes": "Résultats d'apprentissage",
+        "program-detail-certification": "Certification",
+        "program-detail-certification-text": "Les participants qui remplissent les exigences du bootcamp reçoivent un certificat de réussite ou un certificat de formation professionnelle délivré par Python Togo.",
+        "program-detail-mentorship-intro": "Appariement mentor–mentoré : les participants sont jumelés ou mis en relation selon leurs intérêts, objectifs, expérience et disponibilité.",
+        "program-detail-program-pathways": "Parcours de spécialisation",
+        "program-detail-phase-1-duration": "Durée : 3 mois",
+        "program-detail-phase-2-duration": "Durée : 3 mois",
+        "program-detail-phase-3-desc": "Le programme établit d'abord une solide base commune en Python et en ingénierie logicielle avant de permettre aux participants de choisir une spécialisation alignée avec leurs intérêts et leurs objectifs de carrière.",
+        "program-detail-phase-3-availability": "Les parcours disponibles peuvent varier selon la cohorte, les mentors, les projets et la capacité du programme.",
+        "program-detail-availability": "Les parcours disponibles peuvent varier selon la cohorte, les mentors, les projets et la capacité du programme.",
         "nav-code": "Code de conduite",
         "nav-events": "Événements",
         "nav-news": "Actualités",
@@ -669,6 +746,70 @@ TRANSLATIONS = {
         "site-title": "Python Togo",
         "nav-home": "Home",
         "nav-about": "About",
+        "nav-programs": "Programs",
+        "programs-page-title": "Educational Programs",
+        "programs-hero-title": "Python Togo Educational Programs",
+        "programs-hero-description": (
+            "Python Togo offers structured learning opportunities designed to help learners build practical programming, software engineering, and technology skills through community-led education, mentorship, peer learning, and project-based training."
+        ),
+        "programs-card-type": "Type:",
+        "programs-card-audience": "Audience:",
+        "programs-card-focus": "Learning focus:",
+        "programs-card-certification": "Certification:",
+        "programs-card-view": "View program",
+        "programs-view-all": "View all programs",
+        "programs-education-overview": "Education overview",
+        "education-page-title": "Education at Python Togo",
+        "education-hero-title": "Education at Python Togo",
+        "education-hero-description": (
+            "Python Togo provides community-driven technical education through structured programs, mentorship, practical training, peer learning, and project-based learning. Our programs support learners at different stages, from beginners discovering Python to aspiring software engineers developing practical skills in software development, cloud infrastructure, DevOps, and emerging technologies."
+        ),
+        "education-our-programs": "Our Educational Programs",
+        "education-learn-more": "Learn more",
+        "education-philosophy": "Learning Philosophy",
+        "education-practical": "Practical learning",
+        "education-community": "Community-driven education",
+        "education-collaboration": "Peer collaboration",
+        "education-mentorship": "Mentorship",
+        "education-open-source": "Open-source culture",
+        "education-projects": "Project-based development",
+        "education-continuous": "Continuous learning",
+        "education-accessible": "Accessible technical education",
+        "education-certificates": "Certificates",
+        "education-certificates-desc": "Python Togo issues certificates of completion to participants who successfully fulfill the requirements of its educational programs.",
+        "education-certificates-link": "Learn about certificates",
+        "certificates-page-title": "Python Togo Certificates",
+        "certificates-hero-title": "Certificates",
+        "certificates-hero-description": (
+            "Python Togo provides certificates of completion to participants who successfully fulfill the requirements of its structured educational programs."
+        ),
+        "certificates-policy": "Certificate policy",
+        "certificates-policy-text-1": "Certificates are awarded after successful completion. Requirements may include participation, assignments, projects, mentor feedback, practical work, or other program-specific criteria.",
+        "certificates-policy-text-2": "Certificate eligibility depends on fulfilling the requirements of the relevant program.",
+        "certificates-linked": "Programs associated with certificates",
+        "program-detail-duration": "Duration",
+        "program-detail-type": "Type",
+        "program-detail-audience": "Target audience",
+        "program-detail-focus": "Learning focus",
+        "program-detail-learning-topics": "Learning Topics",
+        "program-detail-learning-approach": "Learning Approach",
+        "program-detail-completion": "Completion and Certification",
+        "program-detail-completion-text": "Participants who successfully complete the program requirements receive a Certificate of Completion issued by Python Togo.",
+        "program-detail-model": "Program Model",
+        "program-detail-participants": "Intended Participants",
+        "program-detail-structure": "Program Structure",
+        "program-detail-phase-1": "Phase 1: Core Engineering Foundation",
+        "program-detail-phase-2": "Phase 2: Practical Internship / Applied Engineering",
+        "program-detail-phase-3": "Phase 3: Specialization Pathways",
+        "program-detail-learning-outcomes": "Learning Outcomes",
+        "program-detail-certification": "Certification",
+        "program-detail-certification-text": "Participants who successfully complete the bootcamp requirements receive a Certificate of Completion or Certificate of Professional Training issued by Python Togo.",
+        "program-detail-mentorship-intro": "Mentor–mentee pairing: participants are matched or connected according to relevant interests, goals, experience, and availability.",
+        "program-detail-availability": "The program first establishes a strong common foundation in Python and software engineering before allowing participants to choose a specialization aligned with their interests and career goals.",
+        "program-detail-phase-1-duration": "Duration: 3 months",
+        "program-detail-phase-2-duration": "Duration: 3 months",
+        "program-detail-phase-3-desc": "The program first establishes a strong common foundation in Python and software engineering before allowing participants to choose a specialization aligned with their interests and career goals.",
+        "program-detail-phase-3-availability": "Available pathways may vary by cohort, mentors, projects, and program capacity.",
         "nav-code": "Code of Conduct",
         "nav-events": "Events",
         "nav-news": "News",
@@ -1406,6 +1547,226 @@ async def about(request: Request):
             {
                 "meta_title": TRANSLATIONS[lang]["about-title"] + " — Python Togo",
                 "meta_description": TRANSLATIONS[lang]["about-blurb"],
+            },
+        ),
+    )
+
+
+PROGRAMS = [
+    {
+        "slug": "30-days-of-python",
+        "name": "30 Days of Python",
+        "url": "/programs/30-days-of-python",
+        "duration": "30 days",
+        "type": "Short-term introductory Python learning program",
+        "audience": "Beginners, students, and self-taught learners",
+        "focus": "Python fundamentals and programming foundations",
+        "certificate": "Certificate of Completion for participants who successfully complete the program requirements.",
+        "short_description": "A structured 30-day learning journey designed to introduce participants to Python and build a solid software development foundation.",
+        "description": "30 Days of Python is a structured 30-day learning program designed to introduce participants to Python programming and help them build a strong foundation in software development.",
+        "learning_topics": [
+            "Python fundamentals",
+            "Variables and data types",
+            "Conditions and loops",
+            "Functions",
+            "Data structures",
+            "Modules and packages",
+            "Object-oriented programming",
+            "File handling",
+            "Error handling",
+            "Working with APIs",
+            "Introduction to Git and GitHub",
+            "Practical exercises",
+            "Mini-project development",
+        ],
+        "learning_approach": [
+            "Structured daily learning",
+            "Practical exercises",
+            "Community support",
+            "Peer learning",
+            "Assignments",
+            "Mini-projects",
+            "Progress tracking where applicable",
+        ],
+        "meta_title": "30 Days of Python | Python Togo",
+        "meta_description": "Explore Python Togo's 30 Days of Python program, a structured introductory training pathway for beginners and learners building core programming skills.",
+    },
+    {
+        "slug": "mentorship",
+        "name": "Python Togo Mentorship Program",
+        "url": "/programs/mentorship",
+        "duration": "12 months",
+        "type": "Long-term mentor–mentee development program",
+        "audience": "Beginners, students, self-taught developers, early-career developers, and community members seeking growth",
+        "focus": "Mentorship, peer programming, peer learning, technical growth, and project development",
+        "certificate": "Certificate of Completion after successful completion of the mentorship cycle and its requirements.",
+        "short_description": "A structured 12-month learning and development initiative that connects mentees with mentors to support personal growth, technical learning, and practical project work.",
+        "description": "The Python Togo Mentorship Program is a structured 12-month learning and development initiative that connects mentees with mentors to support technical growth, peer collaboration, practical learning, and long-term professional development.",
+        "learning_topics": [
+            "Mentor–mentee pairing",
+            "Peer programming",
+            "Peer learning",
+            "Technical growth",
+            "Project-based learning",
+            "Progress and accountability",
+        ],
+        "learning_approach": [
+            "Guidance from mentors",
+            "Collaborative coding and problem solving",
+            "Knowledge-sharing sessions",
+            "Study groups and discussions",
+            "Feedback and follow-up",
+            "Improvement of technical and professional skills",
+        ],
+        "meta_title": "Python Togo Mentorship Program",
+        "meta_description": "Learn about Python Togo's 12-month mentorship program designed to support technical growth, peer collaboration, and practical learning.",
+    },
+    {
+        "slug": "engineering-bootcamp",
+        "name": "Python Togo Engineering Bootcamp",
+        "url": "/programs/engineering-bootcamp",
+        "duration": "6 months total (3 months foundation + 3 months practical training)",
+        "type": "Structured software engineering pathway",
+        "audience": "Aspiring developers, career changers, and learners ready for applied engineering work",
+        "focus": "Python, software engineering, DevOps, cloud infrastructure, deployment, and specialization",
+        "certificate": "Certificate of Completion or Certificate of Professional Training for participants who successfully complete the program requirements.",
+        "short_description": "A six-month pathway from Python fundamentals to practical software engineering, deployment, and technical specialization.",
+        "description": "The Python Togo Engineering Bootcamp is a structured six-month educational pathway that builds a strong common foundation in Python and software engineering before participants choose an area of specialization aligned with their interests and career goals.",
+        "learning_topics": [
+            "Python programming",
+            "Programming fundamentals",
+            "Software development principles",
+            "Git and GitHub",
+            "Linux fundamentals",
+            "Databases",
+            "APIs",
+            "Testing",
+            "Debugging",
+            "Software architecture fundamentals",
+            "Application development",
+            "Deployment fundamentals",
+            "DevOps fundamentals",
+            "Cloud infrastructure fundamentals",
+            "Team collaboration",
+            "Project-based learning",
+        ],
+        "learning_approach": [
+            "Practical projects",
+            "Team-based development",
+            "Real-world use cases",
+            "Technical assignments",
+            "Deployment activities",
+            "Project documentation",
+            "Collaboration workflows",
+            "Guided practical experience",
+        ],
+        "meta_title": "Python Togo Engineering Bootcamp",
+        "meta_description": "Discover Python Togo's six-month engineering bootcamp combining software fundamentals, practical experience, and specialization pathways.",
+    },
+]
+
+
+@app.get("/programs", response_class=HTMLResponse)
+async def programs(request: Request):
+    """Render the educational programs overview page."""
+    lang = get_language(request)
+    return templates.TemplateResponse(
+        request=request,
+        name="programs.html",
+        context=ctx(
+            request,
+            {
+                "programs": PROGRAMS,
+                "meta_title": "Python Togo Educational Programs — Python Togo",
+                "meta_description": "Explore Python Togo's structured educational programs, including 30 Days of Python, mentorship, and a practical software engineering bootcamp.",
+            },
+        ),
+    )
+
+
+@app.get("/programs/30-days-of-python", response_class=HTMLResponse)
+async def program_30_days_of_python(request: Request):
+    """Render the 30 Days of Python detail page."""
+    program = next(item for item in PROGRAMS if item["slug"] == "30-days-of-python")
+    return templates.TemplateResponse(
+        request=request,
+        name="program_detail.html",
+        context=ctx(
+            request,
+            {
+                "program": program,
+                "meta_title": program["meta_title"],
+                "meta_description": program["meta_description"],
+            },
+        ),
+    )
+
+
+@app.get("/programs/mentorship", response_class=HTMLResponse)
+async def program_mentorship(request: Request):
+    """Render the mentorship detail page."""
+    program = next(item for item in PROGRAMS if item["slug"] == "mentorship")
+    return templates.TemplateResponse(
+        request=request,
+        name="program_detail.html",
+        context=ctx(
+            request,
+            {
+                "program": program,
+                "meta_title": program["meta_title"],
+                "meta_description": program["meta_description"],
+            },
+        ),
+    )
+
+
+@app.get("/programs/engineering-bootcamp", response_class=HTMLResponse)
+async def program_engineering_bootcamp(request: Request):
+    """Render the engineering bootcamp detail page."""
+    program = next(item for item in PROGRAMS if item["slug"] == "engineering-bootcamp")
+    return templates.TemplateResponse(
+        request=request,
+        name="program_detail.html",
+        context=ctx(
+            request,
+            {
+                "program": program,
+                "meta_title": program["meta_title"],
+                "meta_description": program["meta_description"],
+            },
+        ),
+    )
+
+
+@app.get("/education", response_class=HTMLResponse)
+async def education(request: Request):
+    """Render the education landing page for public institutional overview."""
+    return templates.TemplateResponse(
+        request=request,
+        name="education.html",
+        context=ctx(
+            request,
+            {
+                "programs": PROGRAMS,
+                "meta_title": "Education at Python Togo",
+                "meta_description": "Python Togo provides community-driven technical education through structured programs, mentorship, practical training, and project-based learning.",
+            },
+        ),
+    )
+
+
+@app.get("/certificates", response_class=HTMLResponse)
+async def certificates(request: Request):
+    """Render the certificates overview page."""
+    return templates.TemplateResponse(
+        request=request,
+        name="certificates.html",
+        context=ctx(
+            request,
+            {
+                "programs": PROGRAMS,
+                "meta_title": "Python Togo Certificates",
+                "meta_description": "Python Togo provides certificates of completion to participants who successfully fulfill the requirements of its structured educational programs.",
             },
         ),
     )

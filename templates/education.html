@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ t.get('education-page-title', 'Education at Python Togo') }}{% endblock %}
+
+{% block content %}
+<section class="container program-page">
+    <div class="programs-hero">
+        <span class="eyebrow">{{ t.get('nav-programs', 'Programs') }}</span>
+        <h1>{{ t.get('education-hero-title', 'Education at Python Togo') }}</h1>
+        <p>
+            {{ t.get('education-hero-description', 'Python Togo provides community-driven technical education through structured programs, mentorship, practical training, peer learning, and project-based learning. Our programs support learners at different stages, from beginners discovering Python to aspiring software engineers developing practical skills in software development, cloud infrastructure, DevOps, and emerging technologies.') }}
+        </p>
+    </div>
+</section>
+
+<section class="container">
+    <h2>{{ t.get('education-our-programs', 'Our Educational Programs') }}</h2>
+    <div class="program-grid">
+        {% for program in programs %}
+        <article class="program-card">
+            <div class="program-card-header">
+                <span class="badge">{{ program.duration }}</span>
+                <h3>{{ program.name }}</h3>
+            </div>
+            <p>{{ program.short_description }}</p>
+            <div class="card-actions">
+                <a class="btn btn-secondary" href="{{ program.url }}">{{ t.get('education-learn-more', 'Learn more') }}</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="container">
+    <h2>{{ t.get('education-philosophy', 'Learning Philosophy') }}</h2>
+    <ul class="check-list">
+        <li>{{ t.get('education-practical', 'Practical learning') }}</li>
+        <li>{{ t.get('education-community', 'Community-driven education') }}</li>
+        <li>{{ t.get('education-collaboration', 'Peer collaboration') }}</li>
+        <li>{{ t.get('education-mentorship', 'Mentorship') }}</li>
+        <li>{{ t.get('education-open-source', 'Open-source culture') }}</li>
+        <li>{{ t.get('education-projects', 'Project-based development') }}</li>
+        <li>{{ t.get('education-continuous', 'Continuous learning') }}</li>
+        <li>{{ t.get('education-accessible', 'Accessible technical education') }}</li>
+    </ul>
+</section>
+
+<section class="container">
+    <h2>{{ t.get('education-certificates', 'Certificates') }}</h2>
+    <p>{{ t.get('education-certificates-desc', 'Python Togo issues certificates of completion to participants who successfully fulfill the requirements of its educational programs.') }}</p>
+    <p><a class="btn btn-secondary" href="/certificates">{{ t.get('education-certificates-link', 'Learn about certificates') }}</a></p>
+</section>
+{% endblock %}

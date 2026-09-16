@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ program.meta_title }}{% endblock %}
+
+{% block content %}
+<section class="container program-page">
+    <div class="program-hero">
+        <span class="eyebrow">{{ t.get('nav-programs', 'Programs') }}</span>
+        <h1>{{ program.name }}</h1>
+        <p>{{ program.description }}</p>
+        <div class="cta-row">
+            <a class="btn" href="/programs">{{ t.get('programs-view-all', 'View all programs') }}</a>
+            <a class="btn btn-secondary" href="/education">{{ t.get('programs-education-overview', 'Education overview') }}</a>
+        </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>{{ t.get('program-detail-duration', 'Duration') }}</h3>
+            <p>{{ program.duration }}</p>
+        </div>
+        <div class="info-card">
+            <h3>{{ t.get('program-detail-type', 'Type') }}</h3>
+            <p>{{ program.type }}</p>
+        </div>
+        <div class="info-card">
+            <h3>{{ t.get('program-detail-audience', 'Target audience') }}</h3>
+            <p>{{ program.audience }}</p>
+        </div>
+        <div class="info-card">
+            <h3>{{ t.get('program-detail-focus', 'Learning focus') }}</h3>
+            <p>{{ program.focus }}</p>
+        </div>
+    </div>
+
+    {% if program.slug == '30-days-of-python' %}
+    <div class="program-section">
+        <h2>{{ t.get('program-detail-learning-topics', 'Learning Topics') }}</h2>
+        <ul class="check-list">
+            {% for topic in program.learning_topics %}
+            <li>{{ topic }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="program-section">
+        <h2>{{ t.get('program-detail-learning-approach', 'Learning Approach') }}</h2>
+        <ul class="check-list">
+            {% for item in program.learning_approach %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="program-section certification-box">
+        <h2>{{ t.get('program-detail-completion', 'Completion and Certification') }}</h2>
+        <p>{{ t.get('program-detail-completion-text', 'Participants who successfully complete the program requirements receive a Certificate of Completion issued by Python Togo.') }}</p>
+    </div>
+    {% elif program.slug == 'mentorship' %}
+    <div class="program-section">
+        <h2>{{ t.get('program-detail-model', 'Program Model') }}</h2>
+        <p>{{ t.get('program-detail-mentorship-intro', 'Mentor–mentee pairing: participants are matched or connected according to relevant interests, goals, experience, and availability.') }}</p>
+        <ul class="check-list">
+            <li>{{ t.get('program-detail-mentorship-item-1', 'Mentor–mentee pairing') }}</li>
+            <li>{{ t.get('program-detail-mentorship-item-2', 'Peer programming') }}</li>
+            <li>{{ t.get('program-detail-mentorship-item-3', 'Peer learning') }}</li>
+            <li>{{ t.get('program-detail-mentorship-item-4', 'Technical growth') }}</li>
+            <li>{{ t.get('program-detail-mentorship-item-5', 'Project-based learning') }}</li>
+            <li>{{ t.get('program-detail-mentorship-item-6', 'Progress and accountability') }}</li>
+        </ul>
+    </div>
+
+    <div class="program-section">
+        <h2>{{ t.get('program-detail-participants', 'Intended Participants') }}</h2>
+        <ul class="check-list">
+            <li>{{ t.get('program-detail-participant-1', 'Beginners seeking guidance') }}</li>
+            <li>{{ t.get('program-detail-participant-2', 'Students') }}</li>
+            <li>{{ t.get('program-detail-participant-3', 'Self-taught developers') }}</li>
+            <li>{{ t.get('program-detail-participant-4', 'Early-career developers') }}</li>
+            <li>{{ t.get('program-detail-participant-5', 'Learners transitioning into technology') }}</li>
+            <li>{{ t.get('program-detail-participant-6', 'Community members seeking structured technical growth') }}</li>
+        </ul>
+    </div>
+
+    <div class="program-section certification-box">
+        <h2>{{ t.get('program-detail-completion', 'Completion and Certification') }}</h2>
+        <p>{{ t.get('program-detail-mentorship-completion', 'Participants who successfully complete the 12-month mentorship program and fulfill its completion requirements receive a Certificate of Completion issued by Python Togo.') }}</p>
+    </div>
+    {% elif program.slug == 'engineering-bootcamp' %}
+    <div class="program-section">
+        <h2>{{ t.get('program-detail-structure', 'Program Structure') }}</h2>
+        <div class="phase-block">
+            <h3>{{ t.get('program-detail-phase-1', 'Phase 1: Core Engineering Foundation') }}</h3>
+            <p><strong>{{ t.get('program-detail-duration', 'Duration') }}:</strong> {{ t.get('program-detail-phase-1-duration', '3 months') }}</p>
+            <p>{{ t.get('program-detail-bootcamp-phase-1', 'This phase gives all participants a shared technical foundation in Python and software engineering.') }}</p>
+            <ul class="check-list">
+                {% for topic in program.learning_topics %}
+                <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="phase-block">
+            <h3>{{ t.get('program-detail-phase-2', 'Phase 2: Practical Internship / Applied Engineering') }}</h3>
+            <p><strong>{{ t.get('program-detail-duration', 'Duration') }}:</strong> {{ t.get('program-detail-phase-2-duration', '3 months') }}</p>
+            <ul class="check-list">
+                {% for item in program.learning_approach %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="phase-block">
+            <h3>{{ t.get('program-detail-phase-3', 'Phase 3: Specialization Pathways') }}</h3>
+            <p>{{ t.get('program-detail-phase-3-desc', 'The program first establishes a strong common foundation in Python and software engineering before allowing participants to choose a specialization aligned with their interests and career goals.') }}</p>
+            <p>{{ t.get('program-detail-phase-3-availability', 'Available pathways may vary by cohort, mentors, projects, and program capacity.') }}</p>
+            <ul class="check-list">
+                <li>{{ t.get('program-detail-specialization-1', 'Software Development') }}</li>
+                <li>{{ t.get('program-detail-specialization-2', 'Backend Development') }}</li>
+                <li>{{ t.get('program-detail-specialization-3', 'DevOps') }}</li>
+                <li>{{ t.get('program-detail-specialization-4', 'DevSecOps') }}</li>
+                <li>{{ t.get('program-detail-specialization-5', 'Cloud and Infrastructure') }}</li>
+                <li>{{ t.get('program-detail-specialization-6', 'Embedded Systems') }}</li>
+                <li>{{ t.get('program-detail-specialization-7', 'Internet of Things (IoT)') }}</li>
+                <li>{{ t.get('program-detail-specialization-8', 'Automation') }}</li>
+                <li>{{ t.get('program-detail-specialization-9', 'Data/AI Engineering') }}</li>
+                <li>{{ t.get('program-detail-specialization-10', 'Other emerging technology areas') }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="program-section">
+        <h2>{{ t.get('program-detail-learning-outcomes', 'Learning Outcomes') }}</h2>
+        <ul class="check-list">
+            <li>{{ t.get('program-detail-outcome-1', 'A strong Python foundation') }}</li>
+            <li>{{ t.get('program-detail-outcome-2', 'Practical software engineering skills') }}</li>
+            <li>{{ t.get('program-detail-outcome-3', 'Experience working with development tools') }}</li>
+            <li>{{ t.get('program-detail-outcome-4', 'Understanding of version control') }}</li>
+            <li>{{ t.get('program-detail-outcome-5', 'Experience building projects') }}</li>
+            <li>{{ t.get('program-detail-outcome-6', 'Exposure to deployment workflows') }}</li>
+            <li>{{ t.get('program-detail-outcome-7', 'Foundational DevOps/cloud knowledge') }}</li>
+            <li>{{ t.get('program-detail-outcome-8', 'Practical collaboration experience') }}</li>
+            <li>{{ t.get('program-detail-outcome-9', 'A clearer technical specialization direction') }}</li>
+            <li>{{ t.get('program-detail-outcome-10', 'A portfolio or practical project experience where applicable') }}</li>
+        </ul>
+    </div>
+
+    <div class="program-section certification-box">
+        <h2>{{ t.get('program-detail-certification', 'Certification') }}</h2>
+        <p>{{ t.get('program-detail-certification-text', 'Participants who successfully complete the bootcamp requirements receive a Certificate of Completion or Certificate of Professional Training issued by Python Togo.') }}</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
